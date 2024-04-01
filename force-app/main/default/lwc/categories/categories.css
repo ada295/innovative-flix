@@ -1,0 +1,6 @@
+.category-box{
+    background-color: rgb(176, 21, 21);
+    border-radius: borderRadiusSmall;
+    height: 50px;
+    width: 50px;
+}

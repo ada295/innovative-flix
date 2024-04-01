@@ -1,0 +1,55 @@
+<!-- <template>
+    <div>
+        <div class="category-box">
+                <div lwc:if={isZeroPage}>
+                    <lightning-card title="Accounts" if:true={accounts}>
+                        <div class="slds-card__body slds-card__body_inner">
+                            <template for:each={accounts} for:item="account">
+                                <div key={account.Id} class="slds-m-around_medium slds-clickable clickable"
+                                    onclick={handleAccountClick} data-id={account.Id} role="button">{account.Name}
+                                </div>
+                            </template>
+                        </div>
+                    </lightning-card>
+                </div>
+            
+                <div lwc:if={isFirstPage}>
+                    <lightning-card title="Vehicle Showrooms" if:true={showrooms}>
+                        <div class="slds-card__body slds-card__body_inner">
+                            <template for:each={showrooms} for:item="showroom">
+                                <div key={showroom.Id} class="slds-m-around_medium slds-clickable clickable"
+                                    onclick={handleShowroomClick} data-id={showroom.Id} role="button">{showroom.Name}
+                                </div>
+                            </template>
+                        </div>
+                    </lightning-card>
+                    </br>
+                    <lightning-button variant="brand" class="back-button" label="Back"
+                        onclick={handleButtonBackClick}>Back</lightning-button>
+                </div>
+            
+                <div lwc:if={isSecondPage}>
+                    <lightning-card title="Vehicles" if:true={vehicles}>
+                        <div class="slds-card__body slds-card__body_inner">
+                            <template for:each={vehicles} for:item="vehicle">
+                                <div key={vehicle.Id} class="slds-m-around_medium slds-clickable clickable"
+                                    onclick={handleVehicleClick} data-id={vehicle.Id} role="button">{vehicle.Brands__c}
+                                    {vehicle.Model__c} <div>Serial number: {vehicle.Name}</div>
+                                </div>
+                            </template>
+                        </div>
+                    </lightning-card>
+                    </br>
+                    <lightning-button variant="brand" class="back-button" label="Back"
+                        onclick={handleButtonBackClick}>Back</lightning-button>
+                </div>
+            
+                <div lwc:if={isThirdPage}>
+                    <c-vehicle-details record-id={vehicleId}></c-vehicle-details>
+                    </br>
+                    <lightning-button variant="brand" class="back-button" label="Back"
+                        onclick={handleButtonBackClick}>Back</lightning-button>
+                </div>
+        </div>
+    </div>
+</template> -->
