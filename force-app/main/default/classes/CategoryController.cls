@@ -21,6 +21,8 @@ public with sharing class CategoryController {
         //     throw new AuraHandledException(e.getMessage());
         // }
 
-        return null;
+
+
+        return [SELECT Name FROM Category__c ORDER BY Name];
     }
 }

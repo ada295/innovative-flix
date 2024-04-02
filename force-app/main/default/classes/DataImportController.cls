@@ -5,7 +5,7 @@ public with sharing class DataImportController {
     }
 
     public static void importTvSerie() {
-        String tvSerieName = 'Monk';
+        String tvSerieName = 'Breaking Bad';
         HttpRequest req = new HttpRequest();
         req.setEndpoint('https://api.tvmaze.com/singlesearch/shows?q='+tvSerieName+'&embed=episodes');
         req.setMethod('GET');
