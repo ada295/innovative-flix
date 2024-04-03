@@ -29,7 +29,7 @@ export default class TvSerieDetails extends NavigationMixin(LightningElement) {
             if(this.tvSerie.Trailer__c && this.tvSerie.Trailer__c.includes("watch?v=")) {
                 this.tvSerie.Trailer__c = this.tvSerie.Trailer__c.replace("watch?v=","embed/");
             }
-            this.template.querySelector('.tv-serie-description').innerHTML = this.tvSerie.Description__c;
+            this.template.querySelector('.tv-serie-description').innerHTML = this.tvSerie.Summary__c;
         } else if (error) {
             console.error('Error loading TV Serie:', error);
         }

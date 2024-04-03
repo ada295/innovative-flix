@@ -15,7 +15,7 @@ public with sharing class EpisodeController {
     public static Episode__c[] getAllEpisodesBySeasonId(Id seasonId){
         // try {
         //     return [
-        //         SELECT Name, Description__c, Logo__c, Traile__c
+        //         SELECT Name, Summary__c, Logo__c, Traile__c
         //         FROM Episode__c
         //         WHERE Season__c = :seasonId
         //     ];

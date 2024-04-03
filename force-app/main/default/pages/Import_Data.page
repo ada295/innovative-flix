@@ -1,6 +1,5 @@
 <apex:page > 
-
   <h1>Congratulations</h1>
   This is your new Page
-
+  <c:ImportDataComponent ></c:ImportDataComponent>
 </apex:page>

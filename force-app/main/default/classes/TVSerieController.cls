@@ -39,7 +39,7 @@ public with sharing class TVSerieController {
     public static TV_Serie__c getTvSerieDetails(Id tvSerieId){
         try {
             return [
-                SELECT Name, Description__c, Logo__c, Trailer__c
+                SELECT Name, Summary__c, Logo__c, Trailer__c
                 FROM TV_Serie__c
                 WHERE Id = :tvSerieId
             ];
