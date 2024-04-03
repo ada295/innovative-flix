@@ -1,12 +1,11 @@
 <template>
-    <div class="slds-grid slds-wrap">
+    <div class="slds-grid slds-wrap category-container">
         <template for:each={categories} for:item="category">
-            <div key={category.Id} class="slds-col slds-size_1-of-4 category-box">
-                <!-- <article class="slds-tile slds-tile_board"> -->
-                <div class=" slds-text-title slds-align_absolute-center slds-text-align_center category-name">
+            <!-- <div key={category.Id} class="category-box"> -->
+            <div key={category.Id} class="category-box">
+                <div class="slds-text-title slds-text-align_center">
                     {category.Name}
                 </div>
-                <!-- </article> -->
             </div>
         </template>
     </div>

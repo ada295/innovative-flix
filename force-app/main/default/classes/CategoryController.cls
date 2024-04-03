@@ -23,6 +23,6 @@ public with sharing class CategoryController {
 
 
 
-        return [SELECT Name FROM Category__c ORDER BY Name];
+        return [SELECT Name, Image__c FROM Category__c ORDER BY Name];
     }
 }

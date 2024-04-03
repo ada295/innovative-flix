@@ -1,29 +1,40 @@
-.category-box{
-    background-color: rgb(147, 130, 130);
-    border-radius: borderRadiusSmall;
-    /* height: 20%;
-    width: 20%; */
-    height: 100px;
-    width: 20%;
-    margin:2.5%;
-    font-size: 40px !important;
-    
-    /* text-align: center; */
+.slds-text-title{
+    font-size: 2.5rem;
+    text-emphasis-color: #38B6FF !important;
 }
 
-.categories-box{
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-    background-color: white;
+.category-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    grid-auto-rows: auto;
 }
 
-.main-box{
-    width: 100%;
+@media (max-width: 768px) {
+    .category-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
 }
 
-.category-name{
-    padding: 10%;
+@media (max-width: 480px) {
+    .category-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+.category-box {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.863), rgba(248, 248, 248, 0.854)), url(https://clipart-library.com/img/1971781.jpg);
+    background-size: cover;
+    background-position: center;
+    /* background-color: #dfe3e5; */
+    padding: 1rem;
+    border-radius: 5px;
     text-align: center;
-    font-size: 80%;
+    font-size: 1rem !important;
+    aspect-ratio: 1.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 0 0 5px #FFDF2B;
+    text-emphasis-color: #38B6FF;
 }
