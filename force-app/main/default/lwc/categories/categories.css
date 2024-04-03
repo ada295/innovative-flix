@@ -1,32 +1,18 @@
 .slds-text-title{
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     text-emphasis-color: #38B6FF !important;
 }
 
 .category-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap: 3rem;
     grid-auto-rows: auto;
 }
 
-@media (max-width: 768px) {
-    .category-container {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-}
-
-@media (max-width: 480px) {
-    .category-container {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-}
-
 .category-box {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.863), rgba(248, 248, 248, 0.854)), url(https://clipart-library.com/img/1971781.jpg);
     background-size: cover;
     background-position: center;
-    /* background-color: #dfe3e5; */
     padding: 1rem;
     border-radius: 5px;
     text-align: center;
@@ -37,4 +23,8 @@
     justify-content: center;
     box-shadow: 0 0 0 5px #FFDF2B;
     text-emphasis-color: #38B6FF;
+}
+
+.category-box:hover{
+    background-image: linear-gradient(rgba(235, 235, 37, 0.863), rgba(215, 21, 21, 0.854))
 }

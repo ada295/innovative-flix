@@ -1,8 +1,8 @@
 <template>
     <div class="slds-grid slds-wrap category-container">
         <template for:each={categories} for:item="category">
-            <!-- <div key={category.Id} class="category-box"> -->
-            <div key={category.Id} class="category-box">
+            <div key={category.Id} class="category-box" style={category.ImgStyle} onclick={handleCategoryClick}
+                data-id={category.Id} role="button">
                 <div class="slds-text-title slds-text-align_center">
                     {category.Name}
                 </div>

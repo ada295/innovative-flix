@@ -14,13 +14,8 @@ public with sharing class TVSerieController {
     @AuraEnabled(cacheable=true)
     public static TV_Serie__c[] getAllTvSeriesByCategoryId(Id categoryId){
         try {
-            // List<Id> tvSeriesId = [
-            //     SELECT TV_Serie__c
-            //     FROM TV_Serie_Category__c
-            //     WHERE Category__c = :categoryId
-            // ];
             return [
-                SELECT Name 
+                SELECT Name, Description__c, Logo__c, Trailer__c
                 FROM TV_Serie__c
                 WHERE Id IN (
                     SELECT TV_Serie__c
