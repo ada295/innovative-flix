@@ -15,13 +15,33 @@ public with sharing class TVSerieController {
     public static TV_Serie__c[] getAllTvSeriesByCategoryId(Id categoryId){
         try {
             return [
-                SELECT Name, Description__c, Logo__c, Trailer__c
+                SELECT Name, Logo__c
                 FROM TV_Serie__c
                 WHERE Id IN (
                     SELECT TV_Serie__c
                     FROM TV_Serie_Category__c
                     WHERE Category__c = :categoryId
                 ) ORDER BY Name
+            ];
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+     /**
+     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+     * @date 29/03/2024
+     * @description The method returns TV Serie's details by ID.
+     * 
+     * @param tvSerieId
+     */
+    @AuraEnabled(cacheable=true)
+    public static TV_Serie__c getTvSerieDetails(Id tvSerieId){
+        try {
+            return [
+                SELECT Name, Description__c, Logo__c, Trailer__c
+                FROM TV_Serie__c
+                WHERE Id = :tvSerieId
             ];
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());

@@ -1,7 +1,6 @@
 .slds-card {
-    margin: 1rem;
-    width: 100%;
-    max-width: 800px; /* Możesz dostosować maksymalną szerokość */
+    margin: 1%;
+    width: 98%;
 }
 
 .slds-card__header {
@@ -15,12 +14,13 @@
 }
 
 .slds-avatar {
-    width: 500px !important;
-    height: 500px !important;
-    /* aspect-ratio: 1.5; */
+    min-width: 100px;
+    max-width: 250px;
+    height: auto;
+    /* aspect-ratio: 1.5;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; */
 }
 
 .slds-embed_center-75 {

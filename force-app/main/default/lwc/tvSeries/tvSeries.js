@@ -21,7 +21,7 @@ export default class TvSeries extends NavigationMixin(LightningElement) {
      * @date 04/03/2024
      * @description The method get all TVSeries By Category Id.
      * 
-     * @param allTVSeries TVSeries of the selected category.
+     * @param categoryId
      */
     @wire(getAllTvSeriesByCategoryId, { categoryId: '$categoryId' }) //categoryId is bounded to the variable and allTVSeries is executed every time value changes
     allTVSeries({ error, data }) {
