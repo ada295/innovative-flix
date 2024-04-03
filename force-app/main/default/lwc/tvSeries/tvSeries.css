@@ -5,7 +5,7 @@
 
 .tv-serie-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(270px, 0.5fr));
     gap: 3rem;
     grid-auto-rows: auto;
 }

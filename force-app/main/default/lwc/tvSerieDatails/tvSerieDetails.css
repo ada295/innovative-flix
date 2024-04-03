@@ -1,0 +1,41 @@
+.slds-card {
+    margin: 1rem;
+    width: 100%;
+    max-width: 800px; /* Możesz dostosować maksymalną szerokość */
+}
+
+.slds-card__header {
+    padding: 0.5rem 1rem;
+    background-color: #f3f2f1;
+    border-bottom: 1px solid #d8dde6;
+}
+
+.slds-card__body {
+    padding: 1rem;
+}
+
+.slds-avatar {
+    width: 500px !important;
+    height: 500px !important;
+    /* aspect-ratio: 1.5; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.slds-embed_center-75 {
+    position: relative;
+    width: 75%;
+    margin: 0 auto;
+    overflow: hidden;
+    padding-top: 56.25%; /* Aspect ratio 16:9 */
+}
+
+.slds-embed_center-75 iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}

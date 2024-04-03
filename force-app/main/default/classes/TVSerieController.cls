@@ -21,7 +21,7 @@ public with sharing class TVSerieController {
                     SELECT TV_Serie__c
                     FROM TV_Serie_Category__c
                     WHERE Category__c = :categoryId
-                )
+                ) ORDER BY Name
             ];
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());

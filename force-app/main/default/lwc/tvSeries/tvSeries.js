@@ -1,8 +1,9 @@
-import { LightningElement, api, wire } from 'lwc';
+import { LightningElement, api, track, wire } from 'lwc';
 import getAllTvSeriesByCategoryId from '@salesforce/apex/TVSerieController.getAllTvSeriesByCategoryId';
 import { CurrentPageReference } from 'lightning/navigation';
+import { NavigationMixin } from 'lightning/navigation';
 
-export default class TvSeries extends LightningElement {
+export default class TvSeries extends NavigationMixin(LightningElement) {
     @api
     categoryId;
     tvSeries = [];
@@ -35,5 +36,21 @@ export default class TvSeries extends LightningElement {
         } else if (error) {
             console.error('Error loading TV Series:', error);
         }
+    }
+
+    handletvSerieClick(event){
+        const tvSerieId = event.currentTarget.dataset.id;
+        // this.tvSerieId = tvSerieId; 
+        // console.log('TV Serie Id: ' + event.currentTarget.dataset.id);  
+        this.navigateToTVSeriePage(event.currentTarget.dataset.id);   
+    }
+
+    navigateToTVSeriePage(id) {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__webPage',
+            attributes: {
+                url: '/tvseriesdetails?id=' + id
+            }
+        });
     }
 }

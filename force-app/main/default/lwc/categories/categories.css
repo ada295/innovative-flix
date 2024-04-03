@@ -22,7 +22,6 @@
     flex-direction: column;
     justify-content: center;
     box-shadow: 0 0 0 5px #FFDF2B;
-    text-emphasis-color: #38B6FF;
 }
 
 .category-box:hover{

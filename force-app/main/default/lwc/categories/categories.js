@@ -17,8 +17,6 @@ export default class Categories extends NavigationMixin(LightningElement) {
                 category.ImgStyle = "background-image: linear-gradient(rgba(255, 255, 255, 0.863), rgba(248, 248, 248, 0.854)), url("+category.Image__c+")";
                 this.categories.push(category);
             }
-            // console.log(categories);
-            // this.categories.forEach((category)=> category.ImgStyle= "background-image: linear-gradient(rgba(255, 255, 255, 0.863), rgba(248, 248, 248, 0.854)), url("+category.Image__c+")");
         } else if (error) {
             console.error('Error loading categories:', error);
         }
@@ -26,16 +24,8 @@ export default class Categories extends NavigationMixin(LightningElement) {
 
     handleCategoryClick(event) {
         const categoryId = event.currentTarget.dataset.id;
-        this.categoryId = categoryId;
-        // getTvSeriesByCategoryId({ categoryId })
-        //     .then(result => {
-        //         this.tvSeries = result;
-
-        //     })
-        //     .catch(error => {
-        //         console.error(error);
-        //     });  
-        console.log('Categiry Id: ' + event.currentTarget.dataset.id);  
+        this.categoryId = categoryId; 
+        // console.log('Category Id: ' + event.currentTarget.dataset.id);  
         this.navigateToCategoryPage(event.currentTarget.dataset.id);   
     }
 
