@@ -1,3 +1,12 @@
 <template>
-    <div>It does not work</div>
+    <div class="slds-grid slds-wrap tv-serie-container">
+        <template for:each={tvSeries} for:item="tvSerie">
+            <div key={tvSerie.Id} class="tv-serie-box" style={tvSerie.ImgStyle} onclick={handleCategoryClick}
+                data-id={tvSerie.Id} role="button">
+                <div class="slds-text-title slds-text-align_center">
+                    {tvSerie.Name}
+                </div>
+            </div>
+        </template>
+    </div>
 </template>

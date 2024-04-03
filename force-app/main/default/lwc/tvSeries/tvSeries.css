@@ -1,0 +1,26 @@
+.slds-text-title{
+    font-size: 1.5rem;
+    /* text-emphasis-color: #38B6FF !important; */
+}
+
+.tv-serie-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 3rem;
+    grid-auto-rows: auto;
+}
+
+.tv-serie-box {
+    background-size: cover;
+    background-position: center;
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1rem !important;
+    aspect-ratio: 1.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 0 0 5px #FFDF2B;
+    /* text-emphasis-color: #38B6FF; */
+}

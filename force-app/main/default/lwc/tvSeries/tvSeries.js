@@ -1,9 +1,11 @@
 import { LightningElement, api, wire } from 'lwc';
 import getAllTvSeriesByCategoryId from '@salesforce/apex/TVSerieController.getAllTvSeriesByCategoryId';
 import { CurrentPageReference } from 'lightning/navigation';
-import { invoke } from '@salesforce/apex';
 
 export default class TvSeries extends LightningElement {
+    @api
+    categoryId;
+    tvSeries = [];
 
     @wire(CurrentPageReference) pageRef; //contains page params
 
@@ -13,8 +15,6 @@ export default class TvSeries extends LightningElement {
         this.categoryId = state.id;
     }
 
-    @api
-    categoryId;
     /**
      * @author Adrianna Zajac <adrianna.zajac@accenture.com>
      * @date 04/03/2024
@@ -24,11 +24,16 @@ export default class TvSeries extends LightningElement {
      */
     @wire(getAllTvSeriesByCategoryId, { categoryId: '$categoryId' }) //categoryId is bounded to the variable and allTVSeries is executed every time value changes
     allTVSeries({ error, data }) {
-        if (data) {
-            this.accounts = data;  
-            console.log(data);          
+        if (data && data.length > 0) {
+            this.tvSeries = [];
+            for(let i=0; i < data.length; i++) {
+                let tvSerie = JSON.parse(JSON.stringify(data[i]));
+                console.log(tvSerie);
+                tvSerie.ImgStyle = "background-image: linear-gradient(rgba(255, 255, 255, 0.863), rgba(248, 248, 248, 0.854)), url("+tvSerie.Logo__c+")";
+                this.tvSeries.push(tvSerie);
+            }    
         } else if (error) {
-            console.error(error);
+            console.error('Error loading TV Series:', error);
         }
     }
 }
