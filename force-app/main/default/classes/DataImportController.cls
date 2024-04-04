@@ -5,7 +5,7 @@ public with sharing class DataImportController {
     }
 
     public static void importTvSerie() {
-        String tvSerieName = 'The%20Bold%20and%20the%20Beautiful';
+        String tvSerieName = 'The One Show';
         HttpRequest req = new HttpRequest();
         req.setEndpoint('https://api.tvmaze.com/singlesearch/shows?q='+tvSerieName);
         req.setMethod('GET');
@@ -70,22 +70,33 @@ public with sharing class DataImportController {
     }
 
     private static void processEpisodesData(Tv_Serie__c tvSerie, List<HttpResponse> responses) {
+        List<EpisodeDTO> all = new List<EpisodeDTO>();
         for(HttpResponse res: responses) {
-           processEpisodesData(tvSerie, res);
+           EpisodeDTO[] episodeDTOs = ((EpisodeDTO[])JSON.deserialize(res.getBody(), EpisodeDTO[].class));
+           for(EpisodeDTO episode: episodeDTOs) {
+            episode.season = 1;
+           }
+           all.addAll(episodeDTOs);
+           if(all.size() > 1500) {
+            System.debug('All:' + all.size());
+            processEpisodesData(tvSerie, all);
+            break;
+           }
+          
         }
     }
 
-    private static void processEpisodesData(Tv_Serie__c tvSerie, HttpResponse res) {
-                EpisodeDTO[] episodeDTOs = ((EpisodeDTO[])JSON.deserialize(res.getBody(), EpisodeDTO[].class));
+    private static void processEpisodesData(Tv_Serie__c tvSerie, List<EpisodeDTO> all) {
+              
                 Map<String, Season__c> seasonsByName = new Map<String, Season__c>(); //season name is key
                 Map<String, List<Episode__c>> episodesBySeasonName = new Map<String, List<Episode__c>>(); //season name is key
 
                 String lastProcessedSeason = '';
                 Integer episodeNumberCounter = 0;
-                for (EpisodeDTO episodeDTO : episodeDTOs) {
+                for (EpisodeDTO episodeDTO : all) {
                     Episode__c episode = new Episode__c();
 
-                    String seasonName = 'Season ' + episodeDTO.season;
+                    String seasonName = 'Season 1';
 
                     if(seasonName.equals(lastProcessedSeason)) {
                         episodeNumberCounter++;
@@ -122,5 +133,4 @@ public with sharing class DataImportController {
                 }   
 
     }
-
 }

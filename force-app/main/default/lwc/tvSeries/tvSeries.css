@@ -5,7 +5,7 @@
 
 .tv-serie-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(270px, 0.5fr));
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap: 3rem;
     grid-auto-rows: auto;
 }
@@ -23,4 +23,9 @@
     justify-content: center;
     box-shadow: 0 0 0 5px #FFDF2B;
     /* text-emphasis-color: #38B6FF; */
+}
+
+
+.bg-music {
+    display: none; /* Hide the audio player */
 }

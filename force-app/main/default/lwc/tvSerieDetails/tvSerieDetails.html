@@ -17,11 +17,15 @@
             </div>
             <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
                 <!-- Embed YouTube video or trailer here -->
-                <div>
-                    <iframe width="560" height="315" src='{tvSerie.Trailer__c}' frameborder="0"
-                        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <div class="video-container">
+                    <iframe autoplay controls class="responsive-iframe" width="560" height="315"
+                        src='{tvSerie.Trailer__c}' frameborder="0" allow="autoplay; encrypted-media"
+                        allowfullscreen></iframe>
                 </div>
             </div>
+        </div>
+        <div>
+            <c-seasons tv-serie-id={tvSerieId}></c-seasons>
         </div>
     </div>
 </template>

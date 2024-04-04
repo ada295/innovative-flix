@@ -1,0 +1,19 @@
+<template>
+    Episodes:
+    <div class="slds-card">
+        <div class="slds-card__header slds-grid slds-grid_align-spread">
+            <!-- <h2 class="slds-text-heading_medium slds-truncate" title={seasonName}>Episodes of {seasonName}</h2> -->
+            <!-- <button class="slds-button slds-button_neutral" onclick={closeEpisodesList}>Close</button> -->
+        </div>
+        <div class="slds-card__body slds-p-around_medium">
+            <template for:each={episodes} for:item="episode">
+                <div key={episode.Id} class="slds-box slds-m-around_medium">
+                    <p class="slds-text-heading_small">Episode {episode.Order__c}: {episode.Name}</p>
+                    <p class="slds-text-body_regular">{episode.Description__c}</p>
+                </div>
+            </template>
+        </div>
+        <lightning-button lwc:if={isToMany} variant="base" label="Show all episodes"
+            onclick={handleClickAndNavigate}></lightning-button>
+    </div>
+</template>

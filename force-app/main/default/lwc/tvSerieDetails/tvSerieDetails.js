@@ -4,7 +4,7 @@ import { NavigationMixin } from 'lightning/navigation';
 import getTvSerieDetails from '@salesforce/apex/TVSerieController.getTvSerieDetails';
 
 export default class TvSerieDetails extends NavigationMixin(LightningElement) {
-    tvSerieId;
+    @track tvSerieId;
     tvSerie = {};
 
     @wire(CurrentPageReference) pageRef; //contains page params
@@ -28,7 +28,9 @@ export default class TvSerieDetails extends NavigationMixin(LightningElement) {
             this.tvSerie = JSON.parse(JSON.stringify(data));
             if(this.tvSerie.Trailer__c && this.tvSerie.Trailer__c.includes("watch?v=")) {
                 this.tvSerie.Trailer__c = this.tvSerie.Trailer__c.replace("watch?v=","embed/");
+            
             }
+            this.tvSerie.Trailer__c = this.tvSerie.Trailer__c + '?autoplay=1&mute=1';
             this.template.querySelector('.tv-serie-description').innerHTML = this.tvSerie.Summary__c;
         } else if (error) {
             console.error('Error loading TV Serie:', error);
@@ -50,4 +52,13 @@ export default class TvSerieDetails extends NavigationMixin(LightningElement) {
     //         }
     //     });
     // }
+
+    resizeIframe() {
+        const iframe = this.template.querySelector('.responsive-iframe');
+        if (iframe) {
+            const height = iframe.contentWindow.document.body.scrollHeight + 'px';
+            iframe.style.height = height;
+        }
+    }
+
 }

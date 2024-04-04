@@ -13,15 +13,14 @@ public with sharing class EpisodeController {
      */
     @AuraEnabled(cacheable=true)
     public static Episode__c[] getAllEpisodesBySeasonId(Id seasonId){
-        // try {
-        //     return [
-        //         SELECT Name, Summary__c, Logo__c, Traile__c
-        //         FROM Episode__c
-        //         WHERE Season__c = :seasonId
-        //     ];
-        // } catch (Exception e) {
-        //     throw new AuraHandledException(e.getMessage());
-        // }
-        return null;
+        try {
+            return [
+                SELECT Name, Description__c
+                FROM Episode__c
+                WHERE Season__c = :seasonId
+            ];
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
     }
 }
