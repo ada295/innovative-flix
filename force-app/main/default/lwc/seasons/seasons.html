@@ -10,11 +10,9 @@
                     <c-episodes season-id={season.Id} current-page={season.currentPage}></c-episodes>
                     <br>
                     <div class="page-buttons-container">
-                        <template lwc:if={numberOfPageNotEquals1}>
-                            <lightning-button variant="brand" class="page-button" label="Back"
-                                onclick={decrementPageNumber} data-index={index}>Back</lightning-button>
-                        </template>
-                        <span>Aktualna Strona = {season.currentPage}</span>
+                        <lightning-button variant="brand" class="page-button" label="Back" onclick={decrementPageNumber}
+                            data-index={index}>Back</lightning-button>
+                        <span>Page: {season.currentPage}</span>
                         <lightning-button variant="brand" class="page-button" label="Next" onclick={incrementPageNumber}
                             data-index={index}>Next</lightning-button>
                     </div>

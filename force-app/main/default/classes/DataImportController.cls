@@ -3,9 +3,9 @@ public with sharing class DataImportController {
     public DataImportController() {
  
     }
-
-    public static void importTvSerie() {
-        String tvSerieName = 'Breaking Bad';
+    @AuraEnabled
+    public static void importTvSerie(String tvSerieName) {
+        // String tvSerieName = 'Breaking Bad';
         HttpRequest req = new HttpRequest();
         req.setEndpoint('https://api.tvmaze.com/singlesearch/shows?q='+tvSerieName);
         req.setMethod('GET');

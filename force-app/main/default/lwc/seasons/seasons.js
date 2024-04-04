@@ -53,8 +53,8 @@ export default class Seasons extends LightningElement {
         console.log(season.currentPage);
     }
 
-    numberOfPageNotEquals1(){
-        console.log('Number of page' + this.selectedPageNumber);
-        return this.selectedPageNumber != 1;
-    }
+    // numberOfPageNotEquals1(){
+    //     console.log('Number of page' + this.selectedPageNumber);
+    //     return this.selectedPageNumber != 1;
+    // }
 }

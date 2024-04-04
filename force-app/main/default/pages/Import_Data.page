@@ -1,5 +1,30 @@
-<apex:page > 
+<!-- <apex:page > 
   <h1>Congratulations</h1>
   This is your new Page
   <c:ImportDataComponent ></c:ImportDataComponent>
+  <c:data-import ></c:data-import>
+
+</apex:page> -->
+
+<apex:page >
+    <!-- Include Lightning Out dependencies -->
+    <apex:includeLightning />
+
+    <div id='importComponent'></div>
+
+    <!-- Define a div where the LWC will be rendered -->
+    <div id="lwcContainer">
+     
+    </div>
+
+    <script>
+     $Lightning.use('c:InnovativeFlixAura', ()=> {
+        $Lightning.createComponent(
+          'c:importTVSerieData',
+          {},
+          'importComponent',
+          (component) => {}
+        );
+      });
+    </script>
 </apex:page>
