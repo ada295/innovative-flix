@@ -5,7 +5,7 @@ public with sharing class DataImportController {
     }
 
     public static void importTvSerie() {
-        String tvSerieName = 'The One Show';
+        String tvSerieName = 'Breaking Bad';
         HttpRequest req = new HttpRequest();
         req.setEndpoint('https://api.tvmaze.com/singlesearch/shows?q='+tvSerieName);
         req.setMethod('GET');
@@ -70,33 +70,22 @@ public with sharing class DataImportController {
     }
 
     private static void processEpisodesData(Tv_Serie__c tvSerie, List<HttpResponse> responses) {
-        List<EpisodeDTO> all = new List<EpisodeDTO>();
         for(HttpResponse res: responses) {
-           EpisodeDTO[] episodeDTOs = ((EpisodeDTO[])JSON.deserialize(res.getBody(), EpisodeDTO[].class));
-           for(EpisodeDTO episode: episodeDTOs) {
-            episode.season = 1;
-           }
-           all.addAll(episodeDTOs);
-           if(all.size() > 1500) {
-            System.debug('All:' + all.size());
-            processEpisodesData(tvSerie, all);
-            break;
-           }
-          
-        }
+            processEpisodesData(tvSerie, res);
+         }
     }
 
-    private static void processEpisodesData(Tv_Serie__c tvSerie, List<EpisodeDTO> all) {
-              
-                Map<String, Season__c> seasonsByName = new Map<String, Season__c>(); //season name is key
-                Map<String, List<Episode__c>> episodesBySeasonName = new Map<String, List<Episode__c>>(); //season name is key
+    private static void processEpisodesData(Tv_Serie__c tvSerie, HttpResponse res) {
+        EpisodeDTO[] episodeDTOs = ((EpisodeDTO[])JSON.deserialize(res.getBody(), EpisodeDTO[].class));
+        Map<String, Season__c> seasonsByName = new Map<String, Season__c>(); //season name is key
+        Map<String, List<Episode__c>> episodesBySeasonName = new Map<String, List<Episode__c>>(); //season name is key
 
                 String lastProcessedSeason = '';
                 Integer episodeNumberCounter = 0;
-                for (EpisodeDTO episodeDTO : all) {
+                for (EpisodeDTO episodeDTO : episodeDTOs) {
                     Episode__c episode = new Episode__c();
 
-                    String seasonName = 'Season 1';
+                    String seasonName = 'Season ' + episodeDTO.season;
 
                     if(seasonName.equals(lastProcessedSeason)) {
                         episodeNumberCounter++;

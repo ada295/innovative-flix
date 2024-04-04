@@ -12,12 +12,16 @@ public with sharing class EpisodeController {
      * @param seasonId Id of the chosen Season.
      */
     @AuraEnabled(cacheable=true)
-    public static Episode__c[] getAllEpisodesBySeasonId(Id seasonId){
+    public static Episode__c[] getAllEpisodesBySeasonId(Id seasonId, Integer page){
+        Integer pageSize = 15;
+        Integer offset = (page - 1) * pageSize;
         try {
             return [
                 SELECT Name, Description__c
                 FROM Episode__c
                 WHERE Season__c = :seasonId
+                ORDER BY Order__c
+                LIMIT :pageSize OFFSET :offset
             ];
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());

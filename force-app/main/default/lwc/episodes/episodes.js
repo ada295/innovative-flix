@@ -3,10 +3,11 @@ import { LightningElement, wire, api, track } from 'lwc';
 
 export default class Episodes extends LightningElement {
     @api seasonId;
+    @api currentPage;
     episodes=[];
     @track
     isToMany = false;
-    MAX_EPISODES_IN_LIST = 3;
+    MAX_EPISODES_IN_LIST = 10;
 
     // renderedCallback() {
     //     if (this.seasonId) {
@@ -21,7 +22,7 @@ export default class Episodes extends LightningElement {
     //     console.log('connect execution');
     // }
 
-    @wire(getAllEpisodesBySeasonId, { seasonId: '$seasonId' })
+    @wire(getAllEpisodesBySeasonId, { seasonId: '$seasonId', page: '$currentPage' })
     wiredEpisodes({ error, data }) {
         console.log("executed getAllEpisodesBySeasonId");
         if (data) {
@@ -29,20 +30,16 @@ export default class Episodes extends LightningElement {
 
             if(data.length > this.MAX_EPISODES_IN_LIST) {
                 this.isToMany = true;
-                for(let i = 0; i < this.MAX_EPISODES_IN_LIST; i++) {
-                    console.log(i);
-                    console.log(data[i]);
-                    this.episodes.push(data[i]);
-                }
             }
+
+            console.log("Fetched ", data.length, " episodes");
+
+            for(let i = 0; i < this.MAX_EPISODES_IN_LIST && i < data.length; i++) {
+                this.episodes.push(data[i]);
+            }
+
         } else if (error) {
             console.error(error);
         }
     }
-
-    // closeEpisodesList() {
-    //     // event, który zamknie listę odcinków
-    //     const closeEvent = new CustomEvent('close');
-    //     this.dispatchEvent(closeEvent);
-    // }
 }

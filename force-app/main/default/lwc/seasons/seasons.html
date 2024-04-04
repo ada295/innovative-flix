@@ -1,17 +1,25 @@
 <template>
     <div class="slds-grid slds-wrap">
         <template for:each={seasons} for:item="season" for:index="index">
-            <div key={season.Id} class="slds-col slds-size_1-of-2">
+            <div key={season.Id} class="slds-col slds-size_1-of-1">
                 <div class="slds-box slds-p-around_medium slds-text-align_center slds-theme_default season-tile"
                     onclick={handleSeasonClick} data-id={season.Id} data-index={index} role="button">
                     {season.Name}
                 </div>
                 <template lwc:if={season.isVisible}>
-                    <c-episodes season-id={season.Id}></c-episodes>
+                    <c-episodes season-id={season.Id} current-page={season.currentPage}></c-episodes>
+                    <br>
+                    <div class="page-buttons-container">
+                        <template lwc:if={numberOfPageNotEquals1}>
+                            <lightning-button variant="brand" class="page-button" label="Back"
+                                onclick={decrementPageNumber} data-index={index}>Back</lightning-button>
+                        </template>
+                        <span>Aktualna Strona = {season.currentPage}</span>
+                        <lightning-button variant="brand" class="page-button" label="Next" onclick={incrementPageNumber}
+                            data-index={index}>Next</lightning-button>
+                    </div>
                 </template>
             </div>
         </template>
     </div>
 </template>
-
-<!-- if:true={isSeasonSelected} -->
