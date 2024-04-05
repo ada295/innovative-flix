@@ -7,7 +7,10 @@
             <template for:each={episodes} for:item="episode">
                 <div key={episode.Id} class="slds-box slds-m-around_medium">
                     <p class="slds-text-heading_small">Episode {episode.Order__c}: {episode.Name}</p>
-                    <p class="slds-text-body_regular">{episode.Summary__c}</p>
+                    <div class="slds-text-body_regular episode-summary">
+                        <lightning-formatted-rich-text value={episode.Summary__c}></lightning-formatted-rich-text>
+                    </div>
+                    <!-- <p class="slds-text-body_regular">{episode.Summary__c}</p> -->
                 </div>
             </template>
         </div>

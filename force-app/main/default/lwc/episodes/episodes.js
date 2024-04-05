@@ -26,17 +26,26 @@ export default class Episodes extends LightningElement {
     wiredEpisodes({ error, data }) {
         console.log("executed getAllEpisodesBySeasonId");
         if (data) {
+
             this.episodes = [];
 
             if(data.length > this.MAX_EPISODES_IN_LIST) {
                 this.isToMany = true;
             }
 
-            console.log("Fetched ", data.length, " episodes");
+            // console.log("Fetched ", data.length, " episodes");
 
             for(let i = 0; i < this.MAX_EPISODES_IN_LIST && i < data.length; i++) {
                 this.episodes.push(data[i]);
+                
             }
+            this.episodes = JSON.parse(JSON.stringify(data));
+            console.log("All:", this.template.querySelectorAll('.episode-summary'));
+            console.log("bez All:", this.template.querySelector('.episode-summary'));
+            // for(let i = 0; i < this.MAX_EPISODES_IN_LIST && i < data.length; i++) {
+            //     this.template.querySelectorAll('.episode-summary')[i].innerHTML = this.episodes[i].Summary__c;
+            // }
+
 
         } else if (error) {
             console.error(error);

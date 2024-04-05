@@ -1,7 +1,10 @@
 <template>
     <div class="slds-box slds-theme_default">
         <lightning-input label="Enter TV Serie Name" value={tvSerieName} onchange={handleInputChange}></lightning-input>
-        <lightning-button label="Import Data" onclick={importData} variant="brand"></lightning-button>
+        <div class='import-button-container'>
+            <lightning-button class='import-button' label="Import Data" onclick={importData}
+                variant="brand"></lightning-button>
+        </div>
     </div>
     <div if:true={showMessage} class="slds-text-color_success">
         Data imported - please verify.

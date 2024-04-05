@@ -17,7 +17,7 @@ public with sharing class EpisodeController {
         Integer offset = (page - 1) * pageSize;
         try {
             return [
-                SELECT Name, Description__c
+                SELECT Name, Summary__c
                 FROM Episode__c
                 WHERE Season__c = :seasonId
                 ORDER BY Order__c
