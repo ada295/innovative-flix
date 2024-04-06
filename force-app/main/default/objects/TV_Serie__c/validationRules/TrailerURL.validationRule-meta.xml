@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TrailerURL</fullName>
+    <active>true</active>
+    <description>Trailer must be URL.</description>
+    <errorConditionFormula>AND(
+NOT(ISBLANK( Trailer__c )),
+NOT(REGEX( Trailer__c ,&quot;^https?://[\\w\\-.]+(\\.[a-z]{2,}){1,2}([/?].*)?$&quot;)))</errorConditionFormula>
+    <errorDisplayField>Trailer__c</errorDisplayField>
+    <errorMessage>Incorrect URL.</errorMessage>
+</ValidationRule>
