@@ -35,8 +35,8 @@ export default class TvSeries extends NavigationMixin(LightningElement) {
                 tvSerie.ImgStyle = "background-image: linear-gradient(rgba(255, 255, 255, 0.863), rgba(248, 248, 248, 0.854)), url("+tvSerie.Logo__c+")";
                 this.tvSeries.push(tvSerie);
 
-                this.audioElement = new Audio( "https://cdn.freesound.org/previews/731/731001_1648170-lq.mp3" );
-                this.audioElement.play();
+                // this.audioElement = new Audio( "https://cdn.freesound.org/previews/731/731001_1648170-lq.mp3" );
+                // this.audioElement.play();
             }    
         } else if (error) {
             console.error('Error loading TV Series:', error);

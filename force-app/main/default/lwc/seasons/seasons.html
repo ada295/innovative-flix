@@ -8,14 +8,6 @@
                 </div>
                 <template lwc:if={season.isVisible}>
                     <c-episodes season-id={season.Id} current-page={season.currentPage}></c-episodes>
-                    <br>
-                    <div class="page-buttons-container">
-                        <lightning-button variant="brand" class="page-button" label="Back" onclick={decrementPageNumber}
-                            data-index={index}>Back</lightning-button>
-                        <span>Page: {season.currentPage}</span>
-                        <lightning-button variant="brand" class="page-button" label="Next" onclick={incrementPageNumber}
-                            data-index={index}>Next</lightning-button>
-                    </div>
                 </template>
             </div>
         </template>

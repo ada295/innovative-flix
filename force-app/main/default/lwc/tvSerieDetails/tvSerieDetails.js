@@ -16,7 +16,6 @@ export default class TvSerieDetails extends NavigationMixin(LightningElement) {
         if(state.id.includes('random')) {
             getRandomTvSerieDetails()
                 .then(result => {
-                    console.log("random id", result);
                     this.tvSerieId = result;
                 })
                 .catch(error => {

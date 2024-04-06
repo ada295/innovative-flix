@@ -3,7 +3,7 @@ import { LightningElement, api, track, wire } from 'lwc';
 
 export default class Seasons extends LightningElement {
     @api tvSerieId;
-    @track selectedSeasonId;
+    // @track selectedSeasonId;
     // @track selectedPageNumber = 1;
     @track seasons=[];
     showEpisodes = false;
@@ -35,22 +35,6 @@ export default class Seasons extends LightningElement {
         // episodesComponent.setAttribute('season-id', this.selectedSeasonId);
 
         // container.appendChild(episodesComponent);
-    }
-
-    decrementPageNumber(event){
-        let season = this.seasons[event.currentTarget.dataset.index];
-
-        if(season.currentPage > 1){
-            season.currentPage--;
-        } 
-        console.log(season.currentPage);
-    }
-
-    incrementPageNumber(){
-        let season = this.seasons[event.currentTarget.dataset.index];
-
-        season.currentPage++;
-        console.log(season.currentPage);
     }
 
     // numberOfPageNotEquals1(){
