@@ -1,3 +1,3 @@
-trigger TVSerieTrigger on SOBJECT (before insert) {
+trigger TVSerieTrigger on Tv_Serie__c (before insert) {
 
 }

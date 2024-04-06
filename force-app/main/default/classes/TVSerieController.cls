@@ -36,7 +36,7 @@ public with sharing class TVSerieController {
      * @param tvSerieId
      */
     @AuraEnabled(cacheable=true)
-    public static TV_Serie__c getTvSerieDetails(Id tvSerieId){
+    public static TV_Serie__c getTvSerieDetails(String tvSerieId) {
         try {
             return [
                 SELECT Name, Summary__c, Logo__c, Trailer__c
@@ -47,4 +47,21 @@ public with sharing class TVSerieController {
             throw new AuraHandledException(e.getMessage());
         }
     }
+
+    @AuraEnabled(cacheable=false)
+    public static Id getRandomTvSerieDetails() {
+        TV_Serie__c[] ids =   [
+                SELECT Id
+                FROM TV_Serie__c
+                WHERE Only_for_adults__c <> true
+            ];
+
+        if(ids.size() > 0) {
+            Integer randomNumber = Integer.valueOf(Math.floor(Math.random() * ids.size()));
+            return ids[randomNumber].Id;
+        }
+
+        return null;
+    }
+
 }

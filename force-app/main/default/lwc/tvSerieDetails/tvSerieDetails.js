@@ -2,6 +2,7 @@ import { LightningElement, api, track, wire } from 'lwc';
 import { CurrentPageReference } from 'lightning/navigation';
 import { NavigationMixin } from 'lightning/navigation';
 import getTvSerieDetails from '@salesforce/apex/TVSerieController.getTvSerieDetails';
+import getRandomTvSerieDetails from '@salesforce/apex/TVSerieController.getRandomTvSerieDetails';
 
 export default class TvSerieDetails extends NavigationMixin(LightningElement) {
     @track tvSerieId;
@@ -12,7 +13,18 @@ export default class TvSerieDetails extends NavigationMixin(LightningElement) {
     connectedCallback() { //runs on initialization
         const state = this.pageRef && this.pageRef.state;
         console.log("tvSerie", state.id);
-        this.tvSerieId = state.id;
+        if(state.id.includes('random')) {
+            getRandomTvSerieDetails()
+                .then(result => {
+                    console.log("random id", result);
+                    this.tvSerieId = result;
+                })
+                .catch(error => {
+                    console.error('Error fetching TV Series:', error);
+                });
+        } else {
+            this.tvSerieId = state.id;
+        }
     }
 
     /**

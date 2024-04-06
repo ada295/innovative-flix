@@ -29,11 +29,24 @@ export default class Categories extends NavigationMixin(LightningElement) {
         this.navigateToCategoryPage(event.currentTarget.dataset.id);   
     }
 
+    handleRandomMovieClick(event) {
+        this.navigateToRandomTVDetails();   
+    }
+
     navigateToCategoryPage(id) {
         this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
             attributes: {
                 url: '/categorydetails?id=' + id
+            }
+        });
+    }
+
+    navigateToRandomTVDetails() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__webPage',
+            attributes: {
+                url: '/tvseriesdetails?id=random'
             }
         });
     }
