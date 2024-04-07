@@ -25,9 +25,10 @@ export default class Episodes extends LightningElement {
         }
     }
 
-    @wire(getAllEpisodesBySeasonId, { seasonId: '$seasonId', page: '$currentPage' })
-    wiredEpisodes({ error, data }) {
-        this.processEpisodes(data);
+    error;
+
+    connectedCallback() { 
+        this.loadEpisodes();
     }
 
     processEpisodes(data) {

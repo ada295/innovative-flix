@@ -11,7 +11,7 @@ public with sharing class TVSerieController implements Database.Batchable<SObjec
      * 
      * @param categoryId Id of the chosen Category.
      */
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled(cacheable=false)
     public static TV_Serie__c[] getAllTvSeriesByCategoryId(Id categoryId){
         try {
             return [
@@ -35,7 +35,7 @@ public with sharing class TVSerieController implements Database.Batchable<SObjec
      * 
      * @param tvSerieId
      */
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled(cacheable=false)
     public static TV_Serie__c getTvSerieDetails(String tvSerieId) {
         try {
             return [

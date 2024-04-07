@@ -11,7 +11,7 @@ public with sharing class EpisodeController {
      * 
      * @param seasonId Id of the chosen Season.
      */
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled(cacheable=false)
     public static EpisodesResponseDTO getAllEpisodesBySeasonId(Id seasonId, Integer page) {
         if(page == null) {
             page = 1;

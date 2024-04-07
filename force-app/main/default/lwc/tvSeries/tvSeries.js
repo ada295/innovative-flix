@@ -12,41 +12,31 @@ export default class TvSeries extends NavigationMixin(LightningElement) {
 
     @wire(CurrentPageReference) pageRef; //contains page params
 
-    connectedCallback() { //runs on TvSeries initialization
+    error;
+
+    connectedCallback() { 
         const state = this.pageRef && this.pageRef.state;
         console.log("categoryId", state.id);
         this.categoryId = state.id;
-    }
-
-    /**
-     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
-     * @date 04/03/2024
-     * @description The method get all TVSeries By Category Id.
-     * 
-     * @param categoryId
-     */
-    @wire(getAllTvSeriesByCategoryId, { categoryId: '$categoryId' }) //categoryId is bounded to the variable and allTVSeries is executed every time value changes
-    allTVSeries({ error, data }) {
-        if (data && data.length > 0) {
-            this.tvSeries = [];
-            for(let i=0; i < data.length; i++) {
-                let tvSerie = JSON.parse(JSON.stringify(data[i]));
-                console.log(tvSerie);
-                tvSerie.ImgStyle = "background-image: linear-gradient(rgba(255, 255, 255, 0.863), rgba(248, 248, 248, 0.854)), url("+tvSerie.Logo__c+")";
-                this.tvSeries.push(tvSerie);
-
-                // this.audioElement = new Audio( "https://cdn.freesound.org/previews/731/731001_1648170-lq.mp3" );
-                // this.audioElement.play();
-            }    
-        } else if (error) {
-            console.error('Error loading TV Series:', error);
-        }
+        getAllTvSeriesByCategoryId({ categoryId: this.categoryId })
+           .then(data => {
+            if (data && data.length > 0) {
+                this.tvSeries = [];
+                for(let i=0; i < data.length; i++) {
+                    let tvSerie = JSON.parse(JSON.stringify(data[i]));
+                    console.log(tvSerie);
+                    tvSerie.ImgStyle = "background-image: linear-gradient(rgba(255, 255, 255, 0.863), rgba(248, 248, 248, 0.854)), url("+tvSerie.Logo__c+")";
+                    this.tvSeries.push(tvSerie);
+                }    
+            }
+           })
+           .catch(exception => {
+               this.error = exception.body.pageErrors[0].message;
+           });
     }
 
     handletvSerieClick(event){
         const tvSerieId = event.currentTarget.dataset.id;
-        // this.tvSerieId = tvSerieId; 
-        // console.log('TV Serie Id: ' + event.currentTarget.dataset.id);  
         this.audioElement = {}  
         this.navigateToTVSeriePage(event.currentTarget.dataset.id);
     }

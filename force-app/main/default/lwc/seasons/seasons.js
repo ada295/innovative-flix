@@ -7,18 +7,22 @@ export default class Seasons extends LightningElement {
     // @track selectedPageNumber = 1;
     @track seasons=[];
     showEpisodes = false;
+    error;
 
-    @wire(getAllSeasonsByTvSerieId,  { tvSerieId: '$tvSerieId' })
-    allTvSerieSeasons({ error, data }) {
-        if (data) {
-            this.seasons = JSON.parse(JSON.stringify(data));
-            for(let i = 0; i < this.seasons.length; i++) {
-                this.seasons[i].isVisible = false;            
-                this.seasons[i].currentPage = 1;            
+    connectedCallback() { 
+        getAllSeasonsByTvSerieId({ tvSerieId: this.tvSerieId })
+           .then(data => {
+            if (data) {
+                this.seasons = JSON.parse(JSON.stringify(data));
+                for(let i = 0; i < this.seasons.length; i++) {
+                    this.seasons[i].isVisible = false;            
+                    this.seasons[i].currentPage = 1;            
+                }
             }
-        } else if (error) {
-            console.error(error);
-        }
+           })
+           .catch(exception => {
+               this.error = exception.body.pageErrors[0].message;
+           });
     }
 
     handleSeasonClick(event) {

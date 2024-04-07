@@ -11,7 +11,7 @@ public with sharing class SeasonController {
      * 
      * @param tvSerieId Id of the chosen TV Serie.
      */
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled(cacheable=false)
     public static Season__c[] getAllSeasonsByTvSerieId(Id tvSerieId){
         try {
             return [

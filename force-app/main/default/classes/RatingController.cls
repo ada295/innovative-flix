@@ -3,6 +3,11 @@ public with sharing class RatingController {
     @AuraEnabled(cacheable = false)
     public static Rating__c getLoggedUserRatingForSeason(Id seasonId) {
         String userId = UserInfo.getUserId();
+        
+        User[] user = [SELECT Id, Name, UserRoleId FROM User];
+        for(User u: user) {
+            System.debug('Name:' + u.Name + ' role:' + u.UserRoleId);
+        }
         Rating__c[] res = [SELECT Id, Points__c FROM Rating__c WHERE RatingOwner__c = :userId AND Season__c = :seasonId LIMIT 1];
         if(res != null && res.size() > 0) {
             return res[0];

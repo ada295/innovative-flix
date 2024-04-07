@@ -7,6 +7,7 @@ import getRandomTvSerieDetails from '@salesforce/apex/TVSerieController.getRando
 export default class TvSerieDetails extends NavigationMixin(LightningElement) {
     @track tvSerieId;
     tvSerie = {};
+    error;
 
     @wire(CurrentPageReference) pageRef; //contains page params
 
@@ -17,52 +18,34 @@ export default class TvSerieDetails extends NavigationMixin(LightningElement) {
             getRandomTvSerieDetails()
                 .then(result => {
                     this.tvSerieId = result;
+                    this.loadDetails();
                 })
                 .catch(error => {
                     console.error('Error fetching TV Series:', error);
                 });
         } else {
             this.tvSerieId = state.id;
+            this.loadDetails();
         }
     }
 
-    /**
-     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
-     * @date 04/03/2024
-     * @description The method get TVSerie's details
-     * 
-     * @param tvSerieId
-     */
-    @wire(getTvSerieDetails, { tvSerieId: '$tvSerieId' })
-    tvSerieDetails({ error, data }) {
-        if (data) {
-            this.tvSerie = JSON.parse(JSON.stringify(data));
-            if(this.tvSerie.Trailer__c && this.tvSerie.Trailer__c.includes("watch?v=")) {
-                this.tvSerie.Trailer__c = this.tvSerie.Trailer__c.replace("watch?v=","embed/");
-            
-            }
-            this.tvSerie.Trailer__c = this.tvSerie.Trailer__c + '?autoplay=1&mute=1';
-            this.template.querySelector('.tv-serie-description').innerHTML = this.tvSerie.Summary__c;
-        } else if (error) {
-            console.error('Error loading TV Serie:', error);
-        }
+    loadDetails() {
+        getTvSerieDetails({tvSerieId: this.tvSerieId})
+            .then(data => {
+                if (data) {
+                    this.tvSerie = JSON.parse(JSON.stringify(data));
+                    if(this.tvSerie.Trailer__c && this.tvSerie.Trailer__c.includes("watch?v=")) {
+                        this.tvSerie.Trailer__c = this.tvSerie.Trailer__c.replace("watch?v=","embed/");
+                    
+                    }
+                    this.tvSerie.Trailer__c = this.tvSerie.Trailer__c + '?autoplay=1&mute=1';
+                    this.template.querySelector('.tv-serie-description').innerHTML = this.tvSerie.Summary__c;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     }
-
-    // handletvSerieClick(event){
-    //     const tvSerieId = event.currentTarget.dataset.id;
-    //     // this.tvSerieId = tvSerieId; 
-    //     // console.log('TV Serie Id: ' + event.currentTarget.dataset.id);  
-    //     this.navigateToTVSeriePage(event.currentTarget.dataset.id);   
-    // }
-
-    // navigateToTVSeriePage(id) {
-    //     this[NavigationMixin.Navigate]({
-    //         type: 'standard__webPage',
-    //         attributes: {
-    //             url: '/tvseriesdetails?id=' + id
-    //         }
-    //     });
-    // }
 
     resizeIframe() {
         const iframe = this.template.querySelector('.responsive-iframe');
