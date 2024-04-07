@@ -14,6 +14,8 @@ export default class ImportTVSerieData extends LightningElement {
     }
 
     search() {
+        this.showMessage = false;
+        this.error = '';
         search({ tvSerieName: this.tvSerieName })
             .then(result => {
                 this.tvSeriesFromSearch = result;
@@ -25,6 +27,8 @@ export default class ImportTVSerieData extends LightningElement {
     }
 
     importData(event) {
+        this.showMessage = false;
+        this.error = '';
         let tv = this.tvSeriesFromSearch[event.currentTarget.dataset.index];
         //only id is sent beacuse salesforce does not support SIMPLE DTO as input....
         importTvSerieById({ id: tv.id})

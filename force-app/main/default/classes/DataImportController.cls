@@ -1,5 +1,7 @@
 public with sharing class DataImportController {
  
+    public static Boolean executeTriggers = true;
+
     public DataImportController() {
  
     }
@@ -100,6 +102,7 @@ public with sharing class DataImportController {
                 Integer episodeNumberCounter = 0;
                 for (EpisodeDTO episodeDTO : episodeDTOs) {
                     Episode__c episode = new Episode__c();
+                    episode.Source__c = 'DataImport';
 
                     String seasonName = 'Season ' + episodeDTO.season;
 
@@ -134,7 +137,9 @@ public with sharing class DataImportController {
                     for (Episode__c episode : episodes) {
                         episode.Season__c = seasonsByName.get(seasonName).Id;
                     }
+                    executeTriggers = false;
                     insert episodes;
+                    executeTriggers = true;
                 }   
 
     }
