@@ -26,7 +26,7 @@ export default class Seasons extends LightningElement {
         let index = event.currentTarget.dataset.index;
         console.log('Click on Season Button id = ' + this.selectedSeasonId);
         this.seasons[index].isVisible = !this.seasons[index].isVisible;
-        console.log("data-index-season: ",index, this.seasons[index]);
+        console.log("data-index-season: ", index, this.seasons[index]);
 
         // this.template.querySelector('.episodes-container').innerHTML = 'bla bla bla <c-episodes season-id={selectedSeasonId}></c-episodes>';
         // let container = this.template.querySelector('.episodes-container');

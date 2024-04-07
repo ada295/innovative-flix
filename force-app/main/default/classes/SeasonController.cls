@@ -15,7 +15,7 @@ public with sharing class SeasonController {
     public static Season__c[] getAllSeasonsByTvSerieId(Id tvSerieId){
         try {
             return [
-                SELECT Name
+                SELECT Name, Rating__c
                 FROM Season__c
                 WHERE TV_Serie__c = :tvSerieId
             ];
