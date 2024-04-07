@@ -68,7 +68,7 @@ public with sharing class TVSerieController implements Database.Batchable<SObjec
 
     public Database.QueryLocator start (Database.BatchableContext bc) {
         Date deadline = Date.today();
-        return Database.getQueryLocator('SELECT Id FROM TV_Serie__c WHERE Expired_date__c = deadline');
+        return Database.getQueryLocator('SELECT Id FROM TV_Serie__c WHERE Expired_date__c <= deadline');
     }
     /**
     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
