@@ -49,6 +49,32 @@ public with sharing class TVSerieController implements Database.Batchable<SObjec
     }
 
     @AuraEnabled(cacheable=false)
+    public static Tv_Serie__c[] getBestRatingTvSeries(Integer maxBestRated) {
+        try {
+            return [
+                SELECT Name, Summary__c, Logo__c, Trailer__c, Rating__c
+                FROM TV_Serie__c WHERE Rating__c <> null
+                ORDER BY Rating__c DESC LIMIT :maxBestRated
+            ];
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    @AuraEnabled(cacheable=false)
+    public static Tv_Serie__c[] getLatestAddedTvSeries(Integer maxLatestAdded) {
+        try {
+            return [
+                SELECT Name, Summary__c, Logo__c, Trailer__c, Rating__c
+                FROM TV_Serie__c WHERE CreatedDate <> null
+                ORDER BY CreatedDate DESC LIMIT :maxLatestAdded
+            ];
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    @AuraEnabled(cacheable=false)
     public static Id getRandomTvSerieDetails() {
         TV_Serie__c[] ids =   [
                 SELECT Id

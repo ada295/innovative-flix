@@ -32,7 +32,33 @@ export default class Categories extends NavigationMixin(LightningElement) {
     handleRandomMovieClick(event) {
         this.navigateToRandomTVDetails();   
     }
+    
+    handleBestRating(event) {
+        this.navigateToBestRating();   
+    }
 
+    handleLatestAdded(event) {
+        this.navigateToLatestAdded();   
+    }
+
+    navigateToBestRating() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__webPage',
+            attributes: {
+                url: '/bestrated'
+            }
+        });
+    }
+
+    navigateToLatestAdded() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__webPage',
+            attributes: {
+                url: '/latest'
+            }
+        });
+    }
+    
     navigateToCategoryPage(id) {
         this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
