@@ -3,7 +3,7 @@
  * @date 29/03/2024
  * @description This class provides method that gets TV Serie data.
  */
-public with sharing class TVSerieController {
+public with sharing class TVSerieController implements Database.Batchable<SObject>, Schedulable{
     /**
      * @author Adrianna Zajac <adrianna.zajac@accenture.com>
      * @date 29/03/2024
@@ -64,4 +64,33 @@ public with sharing class TVSerieController {
         return null;
     }
 
+
+
+    public Database.QueryLocator start (Database.BatchableContext bc) {
+        Date deadline = Date.today();
+        return Database.getQueryLocator('SELECT Id FROM TV_Serie__c WHERE Expired_date__c = deadline');
+    }
+    /**
+    * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+    * @date 07/04/2024
+    * @description This method is responsible for deleting TV Series with Expired date (Today).
+    * 
+    *@param tvSeriesToDelete List of TV Series which will be deleted.
+    */
+    public void execute(Database.BatchableContext bc, List<Tv_Serie__c> tvSeriesToDelete) {
+        delete tvSeriesToDelete;
+    }
+
+    public void finish(Database.BatchableContext bc) {
+    }
+    /**
+    * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+    * @date 07/04/2024
+    * @description This method is responsible for scheduling the next batch method call.
+    */
+    public void execute(SchedulableContext sc) {
+        TVSerieController batch = new TVSerieController();
+        System.debug('TV Series with expired date deleted successfully!');
+        Database.executeBatch(batch);
+    }
 }
