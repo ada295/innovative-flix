@@ -9,11 +9,11 @@ export default class Rating extends LightningElement {
     rating = {};
 
     points = [
-        { value: '1', label: '1', description: '' },
-        { value: '2', label: '2', description: '' },
-        { value: '3', label: '3', description: '' },
-        { value: '4', label: '4', description: '' },
-        { value: '5', label: '5', description: '' },
+        { value: '1', label: '★☆☆☆☆', description: '' },
+        { value: '2', label: '★★☆☆☆', description: '' },
+        { value: '3', label: '★★★☆☆', description: '' },
+        { value: '4', label: '★★★★☆', description: '' },
+        { value: '5', label: '★★★★★', description: '' },
     ]
 
     connectedCallback() {
@@ -54,5 +54,11 @@ export default class Rating extends LightningElement {
 
     get isRatingPoints() {
         return this.rating.Points__c != undefined;
+    }
+
+    get yourRating() {
+        if(this.rating.Points__c != undefined) {
+            return this.points[parseInt(this.rating.Points__c) - 1].label;
+        }
     }
 }

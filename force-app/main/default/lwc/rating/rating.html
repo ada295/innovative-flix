@@ -7,11 +7,8 @@
         <lightning-button variant="brand" label="Rate" data-id='1' onclick={updateRating}></lightning-button>
     </template>
     <template if:false={edit}>
-        Your rating: <template if:true={isRatingPoints}>{rating.Points__c}</template>
+        <template if:true={isRatingPoints}> Your rating: {yourRating}</template>
         <br>
         <lightning-button variant="brand" label="Rate" data-id='1' onclick={startEditing}></lightning-button>
     </template>
-
-    <!-- Your rating: {rating.Points__c} -->
-
 </template>
