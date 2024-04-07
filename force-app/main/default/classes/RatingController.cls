@@ -24,6 +24,5 @@ public with sharing class RatingController {
             rating.Points__c = points;
             update rating;
         }
-       
     }
 }
