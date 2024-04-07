@@ -3,24 +3,40 @@ public with sharing class DataImportController {
     public DataImportController() {
  
     }
+
     @AuraEnabled
-    public static void importTvSerie(String tvSerieName) {
-        // String tvSerieName = 'Breaking Bad';
+    public static List<TvResponseDTO> search(String tvSerieName) {
         HttpRequest req = new HttpRequest();
-        req.setEndpoint('https://api.tvmaze.com/singlesearch/shows?q='+tvSerieName);
+        req.setEndpoint('https://api.tvmaze.com/search/shows?q='+tvSerieName);
         req.setMethod('GET');
         Http http = new Http();
         HttpResponse res = http.send(req);
 
         if(res.getStatusCode() == 200) {
-             processTVSerie(res);
+            String responseBody = res.getBody();       
+            TvSerieSearchDTO[] searchResult  = (TvSerieSearchDTO[])JSON.deserialize(responseBody, TvSerieSearchDTO[].class);
+            List<TvResponseDTO> result = new List<TvResponseDTO>();
+            for(TvSerieSearchDTO s: searchResult) {
+                result.add(s.show);
+            }
+            return result;
         }
+
+        return null;
     }
 
-    private static void processTvSerie(HttpResponse res) {
-            String responseBody = res.getBody();       
-            TvResponseDTO response = (TvResponseDTO)JSON.deserialize(responseBody, TvResponseDTO.class);
-            HttpResponse seasonsRes = fetchSeasons(response.id);
+
+    @AuraEnabled
+    public static void importTvSerieById(String id) {
+        System.debug('importing' + id);
+
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint('https://api.tvmaze.com/shows/'+ id);
+        req.setMethod('GET');
+        Http http = new Http();
+        HttpResponse res = http.send(req);
+        TvResponseDTO response = (TvResponseDTO)JSON.deserialize(res.getBody(), TvResponseDTO.class);
+        HttpResponse seasonsRes = fetchSeasons(response.id);
             IdHolder[] seasonsIds = ((IdHolder[])JSON.deserialize(seasonsRes.getBody(), IdHolder[].class));
             List<HttpResponse> episodeResponses = new List<HttpResponse>();
             for(IdHolder idHolder: seasonsIds) {

@@ -17,7 +17,7 @@ public with sharing class EpisodeHandler {
                      episode.AddError('This order already exist for chosen Season.');
                  }
              }
-         }                         
+        }                         
      }
  }
 }
