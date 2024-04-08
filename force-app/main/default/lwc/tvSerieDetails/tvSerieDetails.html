@@ -2,7 +2,7 @@
     <div class="slds-card">
         <div class="slds-card__header slds-grid">
             <div class="slds-media slds-media_center slds-has-flexi-truncate">
-                <div class="slds-media__figure">
+                <div lwc:if={logoNotNull} class="slds-media__figure">
                     <img src={tvSerie.Logo__c} alt='Not found' class="slds-avatar" />
                 </div>
                 <div class="slds-media__body">
@@ -18,7 +18,7 @@
             </div>
             <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
                 <!--YouTube trailer-->
-                <div class="video-container">
+                <div lwc:if={trailerNotNull} class="video-container">
                     <iframe autoplay controls class="responsive-iframe" width="560" height="315"
                         src='{tvSerie.Trailer__c}' frameborder="0" allow="autoplay; encrypted-media"
                         allowfullscreen></iframe>

@@ -1,11 +1,10 @@
 .slds-text-title{
     font-size: 1.5rem;
-    /* text-emphasis-color: #38B6FF !important; */
 }
 
 .tv-serie-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 2rem;
     grid-auto-rows: auto;
 }
@@ -23,5 +22,4 @@
     flex-direction: column;
     justify-content: center;
     box-shadow: 0 0 0 5px #FFDF2B;
-    /* text-emphasis-color: #38B6FF; */
 }

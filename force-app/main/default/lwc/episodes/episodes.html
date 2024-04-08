@@ -1,8 +1,7 @@
 <template>
-    <!-- <div>Number of episodes:</div> -->
     <div class="slds-card">
-        <div class="slds-card__header slds-grid slds-grid_align-spread">
-        </div>
+        <!-- <div class="slds-card__header slds-grid slds-grid_align-spread">
+        </div> -->
         <div class="slds-card__body slds-p-around_medium">
             <template for:each={episodes} for:item="episode">
                 <div key={episode.Id} class="slds-box slds-m-around_medium">
@@ -10,21 +9,16 @@
                     <div class="slds-text-body_regular episode-summary">
                         <lightning-formatted-rich-text value={episode.Summary__c}></lightning-formatted-rich-text>
                     </div>
-                    <!-- <p class="slds-text-body_regular">{episode.Summary__c}</p> -->
                 </div>
             </template>
         </div>
         <br>
         <div class="page-buttons-container">
-            <lightning-button variant="brand" class="page-button" label="Back" onclick={decrementPageNumber}
-                data-index='1'>Back</lightning-button>
-            <span>Page: {currentPage}/{allPages}</span>
+            <lightning-button if:false={isFirstPage} variant="brand" class="page-button" label="Back"
+                onclick={decrementPageNumber} data-index='1'>Back</lightning-button>
+            <span class="number-of-pages">Page: {currentPage}/{allPages}</span>
             <lightning-button if:false={isNoMorePages} variant="brand" class="page-button" label="Next"
                 onclick={incrementPageNumber} data-index='1'>Next</lightning-button>
         </div>
-        <!-- <template lwc:if={isToMany}>
-            <lightning-button variant="base" label="Show all episodes"
-                onclick={handleClickAndNavigate}></lightning-button>
-        </template> -->
     </div>
 </template>

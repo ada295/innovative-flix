@@ -1,5 +1,6 @@
 <template>
     <div class="slds-box slds-theme_default">
+        <h4 class="bigger-font">Click TV Serie to import data: </h4>
         <template for:each={tvSeriesFromSearch} for:index="index" for:item="tvSerie">
             <div key={tvSerie.id} role="button" data-index={index} onclick={importData}>
                 <div class="slds-text-align_center">

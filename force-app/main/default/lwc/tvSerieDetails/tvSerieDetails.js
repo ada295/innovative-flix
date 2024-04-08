@@ -39,7 +39,9 @@ export default class TvSerieDetails extends NavigationMixin(LightningElement) {
                     
                     }
                     this.tvSerie.Trailer__c = this.tvSerie.Trailer__c + '?autoplay=1&mute=1';
-                    this.template.querySelector('.tv-serie-description').innerHTML = this.tvSerie.Summary__c;
+                    if(this.tvSerie.Summary__c){
+                        this.template.querySelector('.tv-serie-description').innerHTML = this.tvSerie.Summary__c;
+                    }
                 }
             })
             .catch(error => {
@@ -68,4 +70,13 @@ export default class TvSerieDetails extends NavigationMixin(LightningElement) {
             return rating;
         } return '';
     }  
+
+    
+    get logoNotNull(){
+        return this.tvSerie.Logo__c != undefined;
+    }
+
+    get trailerNotNull(){
+        return this.tvSerie.Trailer__c && this.tvSerie.Trailer__c.includes('youtube');
+    }
 }
