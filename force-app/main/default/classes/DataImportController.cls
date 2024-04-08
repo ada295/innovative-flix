@@ -59,10 +59,7 @@ public with sharing class DataImportController {
     private static void mapToTVSerie(TvResponseDTO response, Tv_Serie__c tvSerie) {
         tvSerie.name = response.name;
         tvSerie.Logo__c = response.image.medium;
-        // result.setStartDate(response.premiered);
-        // result.setStatus(response.status);
         tvSerie.Summary__c = response.summary;
-        // result.setName(response.genres);
     }
 
     private static HttpResponse fetchSeasons(String showId) {
