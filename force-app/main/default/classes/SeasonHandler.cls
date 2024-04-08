@@ -1,5 +1,18 @@
+/**
+ * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+ * @date 08/04/2024
+ * @description This class provides methods for handling Seasons.
+ */
 public with sharing class SeasonHandler {
-       public static void checkUniqueSeasonFieldsByTVSerieId (List<Season__c> seasons) {
+    /**
+     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+     * @date 08/04/2024
+     * @description The method handles logic before insertion or update of Season__c records.
+     * 
+     * @param seasons List of new Season__c records or Season__c records with updated data.
+     * @param tvSerieSeasons List with data existing Season__c records in particular TV_serie__c.
+     */
+    public static void checkUniqueSeasonFieldsByTVSerieId (List<Season__c> seasons) {
         if(seasons == null){
             return;
         }

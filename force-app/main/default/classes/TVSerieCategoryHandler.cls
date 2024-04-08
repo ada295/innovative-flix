@@ -1,4 +1,17 @@
+/**
+ * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+ * @date 08/04/2024
+ * @description This class provides methods for handling TVSeriesCategories.
+ */
 public with sharing class TVSerieCategoryHandler {
+     /**
+     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+     * @date 08/04/2024
+     * @description The method handles logic before insertion or update of TV_Serie_Category__c records.
+     * 
+     * @param tvSeriesCategories List of new TV_Serie_Category__c records or TV_Serie_Category__c records with updated data.
+     * @param oldTVseriesCategories List with data existing TV_Serie_Category__c records.
+     */
     public static void checkUniqueTVSerieCategory (List<TV_Serie_Category__c> tvSeriesCategories) {
      if(tvSeriesCategories == null){
          return;

@@ -1,4 +1,17 @@
+/**
+ * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+ * @date 07/04/2024
+ * @description This class provides methods for handling Episodes.
+ */
 public with sharing class EpisodeHandler {
+    /**
+     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+     * @date 07/04/2024
+     * @description The method handles logic before insertion or update of Episode__c records.
+     * 
+     * @param episodes List of new Episode__c records or Episode__c records with updated data.
+     * @param seasonEpisodes List with data existing Episode__c records for particular Season__c.
+     */
     public static void checkUniqueEpisodeFieldsBySeasonId (List<Episode__c> episodes) {
      if(episodes == null){
          return;

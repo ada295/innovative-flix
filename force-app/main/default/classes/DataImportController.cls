@@ -1,11 +1,21 @@
+/**
+ * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+ * @date 06/04/2024
+ * @description This class provides methods for handling DataImport.
+ */
 public with sharing class DataImportController {
  
     public static Boolean executeTriggers = true;
 
-    public DataImportController() {
- 
-    }
+    public DataImportController() {}
 
+    /**
+     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+     * @date 07/04/2024
+     * @description The method returns TvResponseDTO of chosen tvSerieName.
+     * 
+     * @param tvSerieName Written name of TV Serie Name.
+     */
     @AuraEnabled
     public static List<TvResponseDTO> search(String tvSerieName) {
         HttpRequest req = new HttpRequest();
@@ -27,7 +37,13 @@ public with sharing class DataImportController {
         return null;
     }
 
-
+      /**
+     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+     * @date 07/04/2024
+     * @description The method import TV Serie by chosen TV Serie Id (id from tvmaze).
+     * 
+     * @param id Id of chosen TV Serie to import.
+     */
     @AuraEnabled
     public static void importTvSerieById(String id) {
         System.debug('importing' + id);
@@ -48,6 +64,14 @@ public with sharing class DataImportController {
             processEpisodesData(tvSerie, episodeResponses);
     }
 
+    
+      /**
+     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+     * @date 07/04/2024
+     * @description The method processes imported TV Serie data.
+     * 
+     * @param response Response form https://api.tvmaze.com/shows.
+     */
     private static Tv_Serie__c processTVSeriesData(TvResponseDTO response) {
         Tv_Serie__c result = new Tv_Serie__c();
         mapToTVSerie(response, result);
@@ -55,13 +79,27 @@ public with sharing class DataImportController {
         insert result;
         return result;
     }
-
+    /**
+     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+     * @date 07/04/2024
+     * @description The method map processed data to TV_serie__c.
+     * 
+     * @param response Response from https://api.tvmaze.com/shows.
+     * @param tvSerie New TV Serie.
+    */
     private static void mapToTVSerie(TvResponseDTO response, Tv_Serie__c tvSerie) {
         tvSerie.name = response.name;
         tvSerie.Logo__c = response.image.medium;
         tvSerie.Summary__c = response.summary;
     }
 
+    /**
+     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+     * @date 07/04/2024
+     * @description The method imports seasons by TV Serie Id (from tvmaze).
+     * 
+     * @param showId Id of TV Serie in tvmaze.
+    */
     private static HttpResponse fetchSeasons(String showId) {
         HttpRequest req = new HttpRequest();
         req.setEndpoint('https://api.tvmaze.com/shows/'+showId+'/seasons');
@@ -72,7 +110,13 @@ public with sharing class DataImportController {
         System.debug('Fetched seasons.');
         return res;
     }
-
+    /**
+     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+     * @date 07/04/2024
+     * @description The method imports seasons by season Id (from tvmaze).
+     * 
+     * @param seasonId Id of season in tvmaze.
+    */
     private static HttpResponse fetchEpisodes(String seasonId) {
         HttpRequest episodesReq = new HttpRequest();
         episodesReq.setEndpoint('https://api.tvmaze.com/seasons/'+seasonId+'/episodes');

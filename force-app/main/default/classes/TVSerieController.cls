@@ -1,7 +1,7 @@
 /**
  * @author Adrianna Zajac <adrianna.zajac@accenture.com>
  * @date 29/03/2024
- * @description This class provides method that gets TV Serie data.
+ * @description This class provides methods for getting TV Series data and Batch for daily deleting TV Series with ezpired date .
  */
 public with sharing class TVSerieController implements Database.Batchable<SObject>, Schedulable{
     /**
@@ -50,7 +50,7 @@ public with sharing class TVSerieController implements Database.Batchable<SObjec
 
         /**
      * @author Adrianna Zajac <adrianna.zajac@accenture.com>
-     * @date 29/03/2024
+     * @date 04/04/2024
      * @description The method returns TV Serie's with best ratings.
      * 
      * @param maxBestRated Number of TV_Serie__c records that the method will return.
@@ -68,6 +68,13 @@ public with sharing class TVSerieController implements Database.Batchable<SObjec
         }
     }
 
+     /**
+     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+     * @date 04/04/2024
+     * @description The method returns latest added TV Serie's.
+     * 
+     * @param maxLatestAdded Number of TV_Serie__c records that the method will return.
+     */
     @AuraEnabled(cacheable=false)
     public static Tv_Serie__c[] getLatestAddedTvSeries(Integer maxLatestAdded) {
         try {
@@ -81,6 +88,11 @@ public with sharing class TVSerieController implements Database.Batchable<SObjec
         }
     }
 
+     /**
+     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+     * @date 04/04/2024
+     * @description The method returns Id Of random TV Serie.
+     */
     @AuraEnabled(cacheable=false)
     public static Id getRandomTvSerieDetails() {
         TV_Serie__c[] ids =   [
@@ -98,7 +110,13 @@ public with sharing class TVSerieController implements Database.Batchable<SObjec
     }
 
 
-
+    /**
+    * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+    * @date 07/04/2024
+    * @description This method is responsible for search TV Series to delete.
+    *
+    *@param deadline This is the date that determines the limits of TV series records to be deleted.
+    */
     public Database.QueryLocator start (Database.BatchableContext bc) {
         Date deadline = Date.today();
         return Database.getQueryLocator('SELECT Id FROM TV_Serie__c WHERE Expired_date__c < :deadline OR Expired_date__c = :deadline');

@@ -7,9 +7,10 @@ public with sharing class EpisodeController {
     /**
      * @author Adrianna Zajac <adrianna.zajac@accenture.com>
      * @date 29/03/2024
-     * @description The method returns list of all Episodes of chosen Season.
+     * @description The method returns list of all Episodes of chosen Season and actual page.
      * 
      * @param seasonId Id of the chosen Season.
+     * @param page Number of actual page.
      */
     @AuraEnabled(cacheable=false)
     public static EpisodesResponseDTO getAllEpisodesBySeasonId(Id seasonId, Integer page) {
