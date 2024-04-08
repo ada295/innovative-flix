@@ -33,7 +33,7 @@ public with sharing class TVSerieController implements Database.Batchable<SObjec
      * @date 29/03/2024
      * @description The method returns TV Serie's details by ID.
      * 
-     * @param tvSerieId
+     * @param tvSerieId Id of TV_Serie__c.
      */
     @AuraEnabled(cacheable=false)
     public static TV_Serie__c getTvSerieDetails(String tvSerieId) {
@@ -48,6 +48,13 @@ public with sharing class TVSerieController implements Database.Batchable<SObjec
         }
     }
 
+        /**
+     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+     * @date 29/03/2024
+     * @description The method returns TV Serie's with best ratings.
+     * 
+     * @param maxBestRated Number of TV_Serie__c records that the method will return.
+     */
     @AuraEnabled(cacheable=false)
     public static Tv_Serie__c[] getBestRatingTvSeries(Integer maxBestRated) {
         try {
