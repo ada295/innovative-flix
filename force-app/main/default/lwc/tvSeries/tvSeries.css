@@ -12,7 +12,7 @@
 
 .tv-serie-box {
     background-size: cover;
-    max-width: 270px !important;
+    /* max-width: 270px !important; */
     background-position: center;
     padding: 1rem;
     border-radius: 5px;

@@ -7,7 +7,7 @@
                 </div>
                 <div class="slds-media__body">
                     <h2 class="slds-card__header-title slds-text-heading_medium"><strong>{tvSerie.Name}
-                            {tvSerie.Rating__c}★</strong></h2>
+                            {tvSerieRating}★</strong></h2>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
-                <!-- Embed YouTube video or trailer here -->
+                <!--YouTube trailer-->
                 <div class="video-container">
                     <iframe autoplay controls class="responsive-iframe" width="560" height="315"
                         src='{tvSerie.Trailer__c}' frameborder="0" allow="autoplay; encrypted-media"

@@ -1,34 +1,37 @@
 <template>
-    <div class="slds-grid slds-wrap category-container">
-        <div class="category-box" onclick={handleRandomMovieClick} data-id='1' role="button">
-            <div class="slds-text-title slds-text-align_center">
-                No idea what to watch?
-                <hr>
-            </div>
-            <div>
-                Click to randomly select a movie for the evening!
-            </div>
-        </div>
-        <div class="category-box" onclick={handleBestRating} role="button">
-            <div class="slds-text-title slds-text-align_center">
-                Best rated
-            </div>
-        </div>
-        <div class="category-box" onclick={handleLatestAdded} role="button">
-            <div class="slds-text-title slds-text-align_center">
-                Recently released
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="slds-grid slds-wrap category-container">
-        <template for:each={categories} for:item="category">
-            <div key={category.Id} class="category-box" style={category.ImgStyle} onclick={handleCategoryClick}
-                data-id={category.Id} role="button">
+    <div style="background-color: #5D1212;">
+        <div class="slds-grid slds-wrap category-container">
+            <div class="category-box" style="background-color: white" onclick={handleRandomMovieClick} data-id='1'
+                role="button">
                 <div class="slds-text-title slds-text-align_center">
-                    {category.Name}
+                    No idea what to watch?
+                    <hr>
+                </div>
+                <div>
+                    Click to randomly select a movie for the evening!
                 </div>
             </div>
-        </template>
+            <div class="category-box" style="background-color: white" onclick={handleBestRating} role="button">
+                <div class="slds-text-title slds-text-align_center">
+                    Best rated
+                </div>
+            </div>
+            <div class="category-box" style="background-color: white" onclick={handleLatestAdded} role="button">
+                <div class="slds-text-title slds-text-align_center">
+                    Recently released
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="slds-grid slds-wrap category-container">
+            <template for:each={categories} for:item="category">
+                <div key={category.Id} class="category-box" style={category.ImgStyle} onclick={handleCategoryClick}
+                    data-id={category.Id} role="button">
+                    <div class="slds-text-title slds-text-align_center">
+                        {category.Name}
+                    </div>
+                </div>
+            </template>
+        </div>
     </div>
 </template>

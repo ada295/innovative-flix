@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-content {
+    text-align: center;
+}
+
+.center-content lightning-combobox{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.your-rating{
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.center-content lightning-button {
+    width: 200px;
+}

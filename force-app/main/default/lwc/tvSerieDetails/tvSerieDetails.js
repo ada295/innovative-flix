@@ -55,4 +55,17 @@ export default class TvSerieDetails extends NavigationMixin(LightningElement) {
         }
     }
 
+    get tvSerieRating(){
+        if(this.tvSerie && this.tvSerie.Rating__c != null && this.tvSerie.Rating__c != undefined){
+            let rating = this.tvSerie.Rating__c.toString();
+
+            if (rating.includes('.')) {
+                let parts = rating.split('.');
+                let totalPart = parts[0];
+                let fractionalPart = parts[1].substring(0, 2);
+                rating = totalPart + '.' + fractionalPart;
+            }
+            return rating;
+        } return '';
+    }  
 }
