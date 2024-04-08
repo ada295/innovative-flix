@@ -13,7 +13,6 @@ export default class TvSerieDetails extends NavigationMixin(LightningElement) {
 
     connectedCallback() { //runs on initialization
         const state = this.pageRef && this.pageRef.state;
-        console.log("tvSerie", state.id);
         if(state.id.includes('random')) {
             getRandomTvSerieDetails()
                 .then(result => {
@@ -36,7 +35,6 @@ export default class TvSerieDetails extends NavigationMixin(LightningElement) {
                     this.tvSerie = JSON.parse(JSON.stringify(data));
                     if(this.tvSerie.Trailer__c && this.tvSerie.Trailer__c.includes("watch?v=")) {
                         this.tvSerie.Trailer__c = this.tvSerie.Trailer__c.replace("watch?v=","embed/");
-                    
                     }
                     this.tvSerie.Trailer__c = this.tvSerie.Trailer__c + '?autoplay=1&mute=1';
                     if(this.tvSerie.Summary__c){

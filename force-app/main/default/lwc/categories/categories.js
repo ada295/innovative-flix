@@ -31,7 +31,6 @@ export default class Categories extends NavigationMixin(LightningElement) {
     handleCategoryClick(event) {
         const categoryId = event.currentTarget.dataset.id;
         this.categoryId = categoryId; 
-        // console.log('Category Id: ' + event.currentTarget.dataset.id);  
         this.navigateToCategoryPage(event.currentTarget.dataset.id);   
     }
 

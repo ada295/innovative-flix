@@ -3,26 +3,38 @@ import { LightningElement, api, track, wire } from 'lwc';
 
 export default class Seasons extends LightningElement {
     @api tvSerieId;
-    // @track selectedSeasonId;
-    // @track selectedPageNumber = 1;
     @track seasons=[];
     showEpisodes = false;
     error;
+    seasonsLoaded = false;
+
+    renderedCallback() {
+        if(!this.seasonsLoaded) {
+            this.loadSeasons();
+        }
+    }
+
+    loadSeasons() {
+        getAllSeasonsByTvSerieId({ tvSerieId: this.tvSerieId })
+        .then(data => {
+         if (data) {
+             this.seasons = JSON.parse(JSON.stringify(data));
+             for(let i = 0; i < this.seasons.length; i++) {
+                 this.seasons[i].isVisible = false;            
+                 this.seasons[i].currentPage = 1;            
+             }
+             if(this.seasons.length > 0) {
+                this.seasonsLoaded = true;
+             }
+         }
+        })
+        .catch(exception => {
+            this.error = exception.body.pageErrors[0].message;
+        });
+    }
 
     connectedCallback() { 
-        getAllSeasonsByTvSerieId({ tvSerieId: this.tvSerieId })
-           .then(data => {
-            if (data) {
-                this.seasons = JSON.parse(JSON.stringify(data));
-                for(let i = 0; i < this.seasons.length; i++) {
-                    this.seasons[i].isVisible = false;            
-                    this.seasons[i].currentPage = 1;            
-                }
-            }
-           })
-           .catch(exception => {
-               this.error = exception.body.pageErrors[0].message;
-           });
+        this.loadSeasons();
     }
 
     handleSeasonClick(event) {
@@ -31,18 +43,5 @@ export default class Seasons extends LightningElement {
         console.log('Click on Season Button id = ' + this.selectedSeasonId);
         this.seasons[index].isVisible = !this.seasons[index].isVisible;
         console.log("data-index-season: ", index, this.seasons[index]);
-
-        // this.template.querySelector('.episodes-container').innerHTML = 'bla bla bla <c-episodes season-id={selectedSeasonId}></c-episodes>';
-        // let container = this.template.querySelector('.episodes-container');
-
-        // let episodesComponent = document.createElement('c-episodes');
-        // episodesComponent.setAttribute('season-id', this.selectedSeasonId);
-
-        // container.appendChild(episodesComponent);
     }
-
-    // numberOfPageNotEquals1(){
-    //     console.log('Number of page' + this.selectedPageNumber);
-    //     return this.selectedPageNumber != 1;
-    // }
 }
