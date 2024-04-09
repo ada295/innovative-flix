@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UniqueTVSerieName</fullName>
+    <active>true</active>
+    <description>TV Serie Name must be unique</description>
+    <errorConditionFormula>AND(
+   ISCHANGED(Name),
+   VLOOKUP( $ObjectType.TV_Serie__c.Fields.Name, 
+   $ObjectType.TV_Serie__c.Fields.Name, Name) &lt;&gt; NULL
+)</errorConditionFormula>
+    <errorDisplayField>Name</errorDisplayField>
+    <errorMessage>TV serie with this name already exists.</errorMessage>
+</ValidationRule>

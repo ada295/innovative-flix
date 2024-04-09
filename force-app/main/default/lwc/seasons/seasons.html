@@ -1,0 +1,16 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <template for:each={seasons} for:item="season" for:index="index">
+            <div key={season.Id} class="slds-col slds-size_1-of-1">
+                <div class="slds-box slds-p-around_medium slds-text-align_center slds-theme_default season-tile"
+                    onclick={handleSeasonClick} data-id={season.Id} data-index={index} role="button">
+                    {season.Name} ({season.Rating__c}★)
+                </div>
+                <template lwc:if={season.isVisible}>
+                    <c-rating season-id={season.Id}></c-rating>
+                    <c-episodes season-id={season.Id} current-page={season.currentPage}></c-episodes>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

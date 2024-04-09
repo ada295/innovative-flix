@@ -1,0 +1,27 @@
+<template>
+    <template lwc:if={edit}>
+        <div class="container">
+            <div class="center-content">
+                <lightning-combobox name="points" label="Your Rating" placeholder="" value={rating.Points__c}
+                    options={points} onchange={changePointsOnChange}>
+                </lightning-combobox>
+                <br>
+                <lightning-button class='rating-button' variant="brand" label="Rate" data-id='1'
+                    onclick={updateRating}></lightning-button>
+            </div>
+        </div>
+    </template>
+    <template if:false={edit}>
+        <div class="container">
+            <div class="center-content">
+                <div class="your-rating">
+                    <template lwc:if={isRatingPoints}> Your rating: {yourRating}</template>
+                </div>
+                <div>
+                    <lightning-button class='rating-button' variant="brand" label="Rate" data-id='1'
+                        onclick={startEditing}></lightning-button>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>
