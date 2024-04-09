@@ -128,12 +128,28 @@ public with sharing class DataImportController {
         return episodesRes;
     }
 
+     /**
+     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+     * @date 07/04/2024
+     * @description The method processes episodes data from tvmaze.
+     * 
+     * @param tvSerie New imported TV Serie.
+     * @param responses Responses from tvmaze.
+    */
     private static void processEpisodesData(Tv_Serie__c tvSerie, List<HttpResponse> responses) {
         for(HttpResponse res: responses) {
             processEpisodesData(tvSerie, res);
          }
     }
 
+         /**
+     * @author Adrianna Zajac <adrianna.zajac@accenture.com>
+     * @date 07/04/2024
+     * @description The method processes episodes data from tvmaze.
+     * 
+     * @param tvSerie New imported TV serie.
+     * @param responses Responses from tvmaze.
+    */
     private static void processEpisodesData(Tv_Serie__c tvSerie, HttpResponse res) {
         EpisodeDTO[] episodeDTOs = ((EpisodeDTO[])JSON.deserialize(res.getBody(), EpisodeDTO[].class));
         Map<String, Season__c> seasonsByName = new Map<String, Season__c>(); //season name is key
