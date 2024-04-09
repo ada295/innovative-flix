@@ -1,0 +1,30 @@
+.slds-text-title{
+    font-size: 1.5rem;
+    text-emphasis-color: #38B6FF !important;
+}
+
+.category-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 2rem;
+    grid-auto-rows: auto;
+    background-color: #5D1212;
+}
+
+.category-box {
+    background-size: cover;
+    background-position: center;
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1rem !important;
+    aspect-ratio: 1.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 0 0 5px #FFDF2B;
+}
+
+.category-box:hover{
+    background-image: linear-gradient(#FFDF2B, #FFDF2B)
+}

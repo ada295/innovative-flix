@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ExpiredDataMustBeGreaterThanTodayDate</fullName>
+    <active>true</active>
+    <errorConditionFormula>Expired_date__c   &lt; TODAY()</errorConditionFormula>
+    <errorDisplayField>Expired_date__c</errorDisplayField>
+    <errorMessage>Expired date cannot be a date that has already passed.</errorMessage>
+</ValidationRule>

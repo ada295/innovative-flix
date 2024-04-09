@@ -1,0 +1,23 @@
+.import-button-container{
+    text-align: center;
+    margin-top: 3%;
+}
+
+
+.import-button {
+    --slds-c-button-brand-color-background: #EFCB01;
+    --slds-c-button-brand-color-border: #EFCB01;
+    --slds-c-button-brand-color-background-hover: #EFCB01;
+}
+
+.import-button:hover{
+    --slds-c-button-brand-color-background: #EFCB01 !important;
+    /* background-color: var(--slds-c-button-brand-color-background-hover) !important; */
+}
+
+.bigger-font{
+    font-size: large;
+    text-align: center;
+    color: #5D1212;
+    font-weight: bold;
+}
