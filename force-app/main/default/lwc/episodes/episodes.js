@@ -24,7 +24,6 @@ export default class Episodes extends LightningElement {
                 });
         }
     }
-
     error;
 
     connectedCallback() { 

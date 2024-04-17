@@ -22,6 +22,5 @@ public with sharing class SeasonController {
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
-    }
-    
+    }   
 }

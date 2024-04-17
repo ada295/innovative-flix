@@ -28,6 +28,7 @@ trigger RatingTrigger on Rating__c (after insert, after update) {
             }
             update seasonsToUpdate;
 
+            //update TVSeries rating
             Set<Id> relatedTvSeries = new Set<Id>();
             for(Season__c season: seasonsToUpdate){
                 relatedTvSeries.add(season.Tv_Serie__c);

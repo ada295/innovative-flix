@@ -1,5 +1,5 @@
 <template>
-    <div class="slds-grid slds-wrap tv-serie-container">
+    <div class="slds-grid slds-wrap tv-serie-container container">
         <template for:each={tvSeries} for:item="tvSerie">
             <div key={tvSerie.Id} class="tv-serie-box" style={tvSerie.ImgStyle} onclick={handletvSerieClick}
                 data-id={tvSerie.Id} role="button">

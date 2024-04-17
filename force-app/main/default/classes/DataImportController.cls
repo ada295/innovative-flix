@@ -33,7 +33,6 @@ public with sharing class DataImportController {
             }
             return result;
         }
-
         return null;
     }
 
@@ -139,7 +138,7 @@ public with sharing class DataImportController {
     private static void processEpisodesData(Tv_Serie__c tvSerie, List<HttpResponse> responses) {
         for(HttpResponse res: responses) {
             processEpisodesData(tvSerie, res);
-         }
+        }
     }
 
          /**
@@ -155,49 +154,48 @@ public with sharing class DataImportController {
         Map<String, Season__c> seasonsByName = new Map<String, Season__c>(); //season name is key
         Map<String, List<Episode__c>> episodesBySeasonName = new Map<String, List<Episode__c>>(); //season name is key
 
-                String lastProcessedSeason = '';
-                Integer episodeNumberCounter = 0;
-                for (EpisodeDTO episodeDTO : episodeDTOs) {
-                    Episode__c episode = new Episode__c();
-                    episode.Source__c = 'DataImport';
+        String lastProcessedSeason = '';
+        Integer episodeNumberCounter = 0;
+        for (EpisodeDTO episodeDTO : episodeDTOs) {
+            Episode__c episode = new Episode__c();
+            episode.Source__c = 'DataImport';
 
-                    String seasonName = 'Season ' + episodeDTO.season;
+            String seasonName = 'Season ' + episodeDTO.season;
 
-                    if(seasonName.equals(lastProcessedSeason)) {
-                        episodeNumberCounter++;
-                    } else {
-                        episodeNumberCounter = 1;
-                        lastProcessedSeason = seasonName;
-                    }
+            if(seasonName.equals(lastProcessedSeason)) {
+                episodeNumberCounter++;
+            } else {
+                episodeNumberCounter = 1;
+                lastProcessedSeason = seasonName;
+            }
 
-                    if(!seasonsByName.containsKey(seasonName)) {
-                        Season__c season = new Season__c();
-                        season.Name = seasonName;
-                        season.Order__c = episodeDTO.season;
-                        season.TV_Serie__c = tvSerie.Id;
-                        seasonsByName.put(seasonName, season);
-                    }
+            if(!seasonsByName.containsKey(seasonName)) {
+                Season__c season = new Season__c();
+                season.Name = seasonName;
+                season.Order__c = episodeDTO.season;
+                season.TV_Serie__c = tvSerie.Id;
+                seasonsByName.put(seasonName, season);
+            }
 
-                    if(!episodesBySeasonName.containsKey(seasonName)) { //first time episode is added to the map
-                        episodesBySeasonName.put(seasonName, new List<Episode__c>());
-                    }
+            if(!episodesBySeasonName.containsKey(seasonName)) { //first time episode is added to the map
+                episodesBySeasonName.put(seasonName, new List<Episode__c>());
+            }
                 
-                    episode.Name = episodeDTO.name;
-                    episode.Summary__c = episodeDTO.summary;
-                    episode.Order__c = episodeNumberCounter;
-                    episodesBySeasonName.get(seasonName).add(episode);
-                }
+            episode.Name = episodeDTO.name;
+            episode.Summary__c = episodeDTO.summary;
+            episode.Order__c = episodeNumberCounter;
+            episodesBySeasonName.get(seasonName).add(episode);
+        }
 
-                insert seasonsByName.values();
-                for (String seasonName : seasonsByName.keySet()) {
-                    List<Episode__c> episodes = episodesBySeasonName.get(seasonName);
-                    for (Episode__c episode : episodes) {
-                        episode.Season__c = seasonsByName.get(seasonName).Id;
-                    }
-                    executeTriggers = false;
-                    insert episodes;
-                    executeTriggers = true;
-                }   
-
+        insert seasonsByName.values();
+        for (String seasonName : seasonsByName.keySet()) {
+            List<Episode__c> episodes = episodesBySeasonName.get(seasonName);
+            for (Episode__c episode : episodes) {
+                episode.Season__c = seasonsByName.get(seasonName).Id;
+            }
+            executeTriggers = false;
+            insert episodes;
+            executeTriggers = true;
+        }   
     }
 }

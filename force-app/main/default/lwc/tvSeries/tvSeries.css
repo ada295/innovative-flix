@@ -1,6 +1,5 @@
 .slds-text-title{
     font-size: 1.5rem;
-    /* text-emphasis-color: #38B6FF !important; */
 }
 
 .tv-serie-container {
@@ -12,7 +11,6 @@
 
 .tv-serie-box {
     background-size: cover;
-    /* max-width: 270px !important; */
     background-position: center;
     padding: 1rem;
     border-radius: 5px;
@@ -23,10 +21,8 @@
     flex-direction: column;
     justify-content: center;
     box-shadow: 0 0 0 5px #FFDF2B;
-    /* text-emphasis-color: #38B6FF; */
 }
 
-
-.bg-music {
-    display: none; /* Hide the audio player */
+.container {
+    height: 100%;
 }

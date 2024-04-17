@@ -50,6 +50,4 @@ public with sharing class EpisodeController {
             throw new AuraHandledException(e.getMessage());
         }
     }
-
-
 }

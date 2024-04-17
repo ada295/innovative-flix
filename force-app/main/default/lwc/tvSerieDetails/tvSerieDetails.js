@@ -6,6 +6,7 @@ import getRandomTvSerieDetails from '@salesforce/apex/TVSerieController.getRando
 
 export default class TvSerieDetails extends NavigationMixin(LightningElement) {
     @track tvSerieId;
+    @track
     tvSerie = {};
     error;
 

@@ -8,6 +8,10 @@ export default class Seasons extends LightningElement {
     error;
     seasonsLoaded = false;
 
+    handleRatingUpdate(event) {
+        this.seasons[event.detail.seasonIndex].Rating__c = event.detail.seasonRating;
+    }
+
     renderedCallback() {
         if(!this.seasonsLoaded) {
             this.loadSeasons();

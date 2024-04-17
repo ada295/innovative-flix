@@ -7,8 +7,8 @@
                     {season.Name} ({season.Rating__c}★)
                 </div>
                 <template lwc:if={season.isVisible}>
-                    <c-rating season-id={season.Id}></c-rating>
-                    <c-episodes season-id={season.Id} current-page={season.currentPage}></c-episodes>
+                    <c-rating season-id={season.Id} season-index={index} onratingupdate={handleRatingUpdate}></c-rating>
+                    <c-episodes season-id={season.Id} seasoncurrent-page={season.currentPage}></c-episodes>
                 </template>
             </div>
         </template>

@@ -1,5 +1,8 @@
 import getLoggedUserRatingForSeason from '@salesforce/apex/RatingController.getLoggedUserRatingForSeason';
+import getRatingForSeason from '@salesforce/apex/RatingController.getRatingForSeason';
+import getRatingForTVSerie from '@salesforce/apex/RatingController.getRatingForTVSerie';
 import setLoggedUserRatingForSeason from '@salesforce/apex/RatingController.setLoggedUserRatingForSeason';
+import setSeasonsRatingsAndTVSeriesRatings from '@salesforce/apex/RatingController.setSeasonsRatingsAndTVSeriesRatings';
 import { LightningElement, api, track, wire } from 'lwc';
 export default class Rating extends LightningElement {
     @api seasonId;
@@ -7,6 +10,16 @@ export default class Rating extends LightningElement {
 
     @track
     rating = {};
+
+    @api
+    season;
+
+    @track
+    tvSerie = {};
+
+    @api
+    seasonIndex;
+    
 
     points = [
         { value: '1', label: '★☆☆☆☆', description: '' },
@@ -30,11 +43,31 @@ export default class Rating extends LightningElement {
             setLoggedUserRatingForSeason({ seasonId: this.seasonId, points: this.rating.Points__c})
                 .then(result => {
                     this.edit = false;
+                    getRatingForSeason({seasonId: this.seasonId}).then(data => {
+                        if(data) {
+                            console.log(data);
+                            const ratingUpdateEvent = new CustomEvent('ratingupdate', {
+                                detail: {
+                                    seasonRating: JSON.parse(JSON.stringify(data)).Rating__c,
+                                    seasonIndex: this.seasonIndex
+                                }
+                                
+                            });
+                            this.dispatchEvent(ratingUpdateEvent);
+                        } 
+                    })
+                    getRatingForTVSerie({seasonId: this.seasonId}).then(data => {
+                        if(data) {
+                            console.log(data);
+                            this.tvSerie = JSON.parse(JSON.stringify(data));
+                        } 
+                    })
                 })
                 .catch(error => {
                     console.error(error);
                     this.edit = false;
                 });
+                
         }
     }
 
