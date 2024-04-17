@@ -4,12 +4,25 @@ import { LightningElement, api, track, wire } from 'lwc';
 export default class Seasons extends LightningElement {
     @api tvSerieId;
     @track seasons=[];
+    @track tvSerie = {};
     showEpisodes = false;
     error;
     seasonsLoaded = false;
 
     handleRatingUpdate(event) {
         this.seasons[event.detail.seasonIndex].Rating__c = event.detail.seasonRating;
+    }
+
+    handleTvSerieRatingUpdate(event) {
+        console.log('drugi sekces');
+        this.tvSerie = event.detail.tvSerie;
+        const ratingTVSerieEvent = new CustomEvent('tvserierating',{
+            detail: {
+                tvSerieRating: this.tvSerie.Rating__c
+            }
+        })
+        this.dispatchEvent(ratingTVSerieEvent);
+        console.log('trzeci sekces');
     }
 
     renderedCallback() {

@@ -59,7 +59,13 @@ export default class Rating extends LightningElement {
                     getRatingForTVSerie({seasonId: this.seasonId}).then(data => {
                         if(data) {
                             console.log(data);
-                            this.tvSerie = JSON.parse(JSON.stringify(data));
+                            console.log('pierwszy sukces')
+                            const ratingUpdateTVSerieEvent = new CustomEvent('tvserieratingupdate',{
+                                detail: {
+                                    tvSerie: JSON.parse(JSON.stringify(data))
+                                }
+                            })
+                            this.dispatchEvent(ratingUpdateTVSerieEvent);
                         } 
                     })
                 })

@@ -12,6 +12,11 @@ export default class TvSerieDetails extends NavigationMixin(LightningElement) {
 
     @wire(CurrentPageReference) pageRef; //contains page params
 
+    handleTVSerieRating(event) {
+        console.log('Calkowity SUKCES!');
+        this.tvSerie.Rating__c = event.detail.tvSerieRating;
+    }
+
     connectedCallback() { //runs on initialization
         const state = this.pageRef && this.pageRef.state;
         if(state.id.includes('random')) {
